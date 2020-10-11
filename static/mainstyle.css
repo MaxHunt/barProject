@@ -1,0 +1,35 @@
+#shelf {
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 0px 30px #CCC;
+    width: 30em;
+    margin: 3em;
+    text-align: center;
+    font-family: Arial;
+    transition: 0.2s;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#shelf:hover {
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 0px 50px #CCC;
+    width: 30em;
+    margin: 3.3em;
+    text-align: center;
+    font-family: Arial;
+    transition: 0.2s;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.strip {
+    background: linear-gradient(to right,rgba(213, 0, 255, 1) 0%, rgba(111, 0, 255, 1) 100%);
+    border-radius: 10px 10px 0px 0px;
+    height: 8px;
+    margin: -10px;
+    margin-left: -30px;
+    margin-right: -30px;
+    margin-bottom: 6px;
+}

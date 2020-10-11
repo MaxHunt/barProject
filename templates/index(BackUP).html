@@ -1,0 +1,365 @@
+<!DOCTYPE HTML>
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ url_for('static',filename='mainstyle.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+    <body>
+    <center> 
+            <div id = "shelf">                
+                <div class="strip"></div>                
+                <h1>Shelf 1</h1>
+                <!-- <div id="picker" name="1"></div> -->
+                <form id="shelfLights1">
+                    <input type="color" id="shelfColor" value="ff0000" name="1">                  
+                    <input type="submit" value="Run Lights" />
+                </form>
+            </div>
+    </center>
+
+    <center> 
+        <div id = "shelf">                
+            <div class="strip"></div>
+            <h1>Shelf 2</h1>
+            <form id="shelfLights2">
+                <input type="color" id="shelfColor" value="ff0000" name="2">                  
+                <input type="submit" value="Run Lights" />
+            </form>
+        </div>
+</center>
+
+<center> 
+    <div id = "shelf">                
+        <div class="strip"></div>
+        <h1>Shelf 3</h1>
+        <form id="shelfLights3">
+            <input type="color" id="shelfColor" value="ff0000" name="3">                  
+            <input type="submit" value="Run Lights" />
+        </form>
+    </div>
+</center>
+
+<center> 
+    <div id = "shelf">                
+        <div class="strip"></div>
+        <h1>Shelf 4</h1>
+        <form id="shelfLights4">
+            <input type="color" id="shelfColor" value="ff0000" name="4">                  
+            <input type="submit" value="Run Lights" />
+        </form>
+    </div>
+</center>
+
+<center> 
+    <div id = "shelf">                
+        <div class="strip"></div>
+        <h1>Shelf 5</h1>
+        <form id="shelfLights5">
+            <input type="color" id="shelfColor" value="ff0000" name="5">                  
+            <input type="submit" value="Run Lights" />
+        </form>
+    </div>
+</center>
+
+<center> 
+    <div id = "shelf">                
+        <div class="strip"></div>
+        <h1>Shelf 6</h1>
+        <form id="shelfLights6">
+            <input type="color" id="shelfColor" value="ff0000" name="6">                  
+            <input type="submit" value="Run Lights" />
+        </form>
+    </div>
+</center>
+
+<center> 
+    <div id = "shelf">                
+        <div class="strip"></div>
+        <h1>Shelf 7</h1>
+        <form id="shelfLights7">
+            <input type="color" id="shelfColor" value="ff0000" name="7">                   
+            <input type="submit" value="Run Lights" />
+        </form>
+    </div>
+</center>
+
+<center> 
+    <div id = "shelf">                
+        <div class="strip"></div>
+        <h1>Shelf 8</h1>
+        <form id="shelfLights8">
+            <input type="color" id="shelfColor" value="ff0000" name="8">                  
+            <input type="submit" value="Run Lights" />
+        </form>
+    </div>
+</center>
+
+<center> 
+    <div id = "shelf">                
+        <div class="strip"></div>
+        <h1>Shelf 9</h1>
+        <form id="shelfLights9">
+            <input type="color" id="shelfColor" value="ff0000" name="9">                  
+            <input type="submit" value="Run Lights" />
+        </form>
+    </div>
+</center>
+
+<center> 
+    <div id = "shelf">                
+        <div class="strip"></div>
+        <h1>Floor Left </h1>
+        <form id="FloorLeftLights">
+            <input type="color" id="shelfColor" value="ff0000" name="FloorRight">                  
+            <input type="submit" value="Run Lights" />
+        </form>
+    </div>
+</center>
+
+<center> 
+    <div id = "shelf">                
+        <div class="strip"></div>
+        <h1>Floor Middle </h1>
+        <form id="FloorMiddleLights">
+            <input type="color" id="shelfColor" value="ff0000" name="FloorMiddle">                  
+            <input type="submit" value="Run Lights" />
+        </form>
+    </div>
+</center>
+
+<center> 
+    <div id = "shelf">                
+        <div class="strip"></div>
+        <h1>Floor Right </h1>
+        <form id="FloorRightLights">
+            <input type="color" id="shelfColor" value="ff0000" name="FloorRight">                  
+            <input type="submit" value="Run Lights" />
+        </form>
+    </div>
+</center>
+
+<center> 
+    <div id = "shelf">                
+        <div class="strip"></div>
+        <h1>The Bar</h1>        
+        <form id="allLightsOn">                         
+            <input type="submit" value="Run Lights" />
+        </form>
+
+        <form id="allLightsOff">            
+            <input type="submit" value="Stop Lights" />
+        </form>
+
+        <form id="movingLEDrun">           
+            <input type="submit" value="Moving LEDs" />
+        </form>
+
+        <form id="shelfRandomColours">            
+            <input type="submit" value="Shelf Random Colours" />
+        </form>
+
+        <form id="rainbow">            
+            <input type="submit" value="Rainbow Cycle" />
+        </form>
+    </div>
+</center>
+
+       
+    
+
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript">
+
+        var colorPicker1 = new iro.ColorPicker('#picker');
+
+            function hexToRgb(hex) {
+                var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+                } : null;
+            }
+            // $("#shelf").click(function(){
+            //     var div = $(this);
+            //     $.each(div, function(index,value)  {
+            //         console.log("Toggle")
+            //             $("#picker").toggle();
+            //         });  
+
+            // })
+
+            // $("#picker").on('click', function(e) {
+            //         shelfNo = this.name; 
+            //         console.log(shelfNo);
+            //         e.preventDefault();                                      
+            //         var data = {};
+            //         $.each(shelfNo, function(index,value)  {
+            //             colour= hexToRgb((this.shelfColor).value);
+            //             shelf = (this.shelfColor.name)
+            //             var data = {"colour": colour, "shelf": shelf};  
+            //         }); 
+                    // $.each(form, function(index,value)  {
+                    //     colour= hexToRgb((this.shelfColor).value);
+                    //     shelf = (this.shelfColor.name)
+                    //     var data = {"colour": colour, "shelf": shelf};  
+                    // });                    
+                    // var data = {"colour": colour, "shelf": shelf};
+                    // console.log(data)
+                    // $.ajax({
+                    //     type: 'POST',
+                    //     url: '/api/shelfLights',
+                    //     dataType: 'String',
+                    //     contentType: 'application/json; charset=utf-8',
+                    //     data: JSON.stringify(data),                        
+                    //     success: function(callback) {
+                    //         console.log(callback);
+                    //         // Watch out for Cross Site Scripting security issues when setting dynamic content!
+                    //         $(this).html("They are on");
+                    //     },
+                    //     error: function() {
+                    //         $(this).html("error!");
+                    //     }
+                    // });
+                // });   
+
+            $('#shelfLights1').add('#shelfLights2').add('#shelfLights3').add('#shelfLights4').add('#shelfLights5').add('#shelfLights6').add('#shelfLights7').add('#shelfLights8').add('#shelfLights9').add('#FloorRightLights').add('#FloorLeftLights').add('#FloorMiddleLights').submit(function(e) {
+                    e.preventDefault();
+                    var form = $(this);                    
+                    var data = {};
+                    $.each(form, function(index,value)  {
+                        colour= hexToRgb((this.shelfColor).value);
+                        shelf = (this.shelfColor.name)
+                        var data = {"colour": colour, "shelf": shelf};  
+                    });                    
+                    var data = {"colour": colour, "shelf": shelf};
+                    console.log(data)
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/shelfLights',
+                        dataType: 'String',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(data),                        
+                        success: function(callback) {
+                            console.log(callback);
+                            // Watch out for Cross Site Scripting security issues when setting dynamic content!
+                            $(this).html("They are on");
+                        },
+                        error: function() {
+                            $(this).html("error!");
+                        }
+                    });
+                });     
+
+            $('#allLightsOn').submit(function(e) {
+                    e.preventDefault();
+                    
+                    var data = {};                                      
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/allLightsOn',
+                        dataType: 'String',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(data),                        
+                        success: function(callback) {
+                            console.log(callback);
+                            // Watch out for Cross Site Scripting security issues when setting dynamic content!
+                            $(this).html("They are on");
+                        },
+                        error: function() {
+                            $(this).html("error!");
+                        }
+                    });
+                });
+
+                $('#allLightsOff').submit(function(e) {
+                    e.preventDefault();
+
+                    var data = {};
+                   
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/allLightsOff',
+                        dataType: 'String',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(data),
+                        success: function(callback) {
+                            console.log(callback);
+                            // Watch out for Cross Site Scripting security issues when setting dynamic content!
+                            $(this).html("They are off");
+                        },
+                        error: function() {
+                            $(this).html("error!");
+                        }
+                    });
+                });
+
+                $('#movingLEDrun').submit(function(e) {
+                    e.preventDefault();
+
+                    var data = {};
+                   
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/movingLEDrun',
+                        dataType: 'String',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(data),
+                        success: function(callback) {
+                            console.log(callback);
+                            // Watch out for Cross Site Scripting security issues when setting dynamic content!
+                            $(this).html("They are off");
+                        },
+                        error: function() {
+                            $(this).html("error!");
+                        }
+                    });
+                });
+
+                $('#shelfRandomColours').submit(function(e) {
+                    e.preventDefault();
+
+                    var data = {};
+                   
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/shelfRandomColours',
+                        dataType: 'String',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(data),
+                        success: function(callback) {
+                            console.log(callback);
+                            // Watch out for Cross Site Scripting security issues when setting dynamic content!
+                            $(this).html("They are off");
+                        },
+                        error: function() {
+                            $(this).html("error!");
+                        }
+                    });
+                });
+
+                $('#rainbow').submit(function(e) {
+                    e.preventDefault();
+
+                    var data = {};
+                   
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/rainbow',
+                        dataType: 'String',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(data),
+                        success: function(callback) {
+                            console.log(callback);
+                            // Watch out for Cross Site Scripting security issues when setting dynamic content!
+                            $(this).html("They are off");
+                        },
+                        error: function() {
+                            $(this).html("error!");
+                        }
+                    });
+                });
+        </script>
+    </body>
+</html>

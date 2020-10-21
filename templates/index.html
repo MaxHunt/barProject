@@ -169,7 +169,7 @@
                 selectedColor = color.hexString;
             });
 
-            $('#picker').on('mouseup', function (e) {
+            $('#picker').on('pointerup', function (e) {
                 const shelf = e.currentTarget.attributes.getNamedItem('name').value;
 
                 const data = {

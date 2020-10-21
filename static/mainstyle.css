@@ -33,3 +33,8 @@
     margin-right: -30px;
     margin-bottom: 6px;
 }
+
+#picker {
+    display: flex;
+    justify-content: center;
+}

@@ -204,14 +204,25 @@
                     b: parseInt(result[3], 16)
                 } : null;
             }
-            // $("#shelf").click(function(){
-            //     var div = $(this);
-            //     $.each(div, function(index,value)  {
-            //         console.log("Toggle")
-            //             $("#picker").toggle();
-            //         });  
 
-            // })
+            $(".shelf").click(function(event) {
+                console.log(event);
+
+                const shelf = event.currentTarget;
+                const picker = $(shelf).find('#picker .IroColorPicker')[0];
+                const pickerBounds = picker.getBoundingClientRect();
+
+                if (
+                    event.pageX >= pickerBounds.x && 
+                    event.pageY >= pickerBounds.y && 
+                    event.pageX <= pickerBounds.x + pickerBounds.width &&
+                    event.pageY <= pickerBounds.y + pickerBounds.height
+                ) {
+                    console.log('Nah mate');
+                } else {
+                    $(picker).toggle();
+                }
+            });
 
             $("#picker").on('click', function (e) {
                 // Get Shelf Number

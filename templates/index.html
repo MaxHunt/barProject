@@ -12,35 +12,35 @@
             <div class="shelf" number="1">
                 <div class="strip"></div>
                 <h1>Shelf 1</h1>
-                <div class="picker" id="picker1" name="1"></div>                
+                <div class="picker picker-hidden" id="picker1" name="1"></div>                
             </div>
         </center>
         <center>
             <div class="shelf" number="2">
                 <div class="strip"></div>
                 <h1>Shelf 2</h1>
-                <div class="picker" id="picker2" name="2"></div>             
+                <div class="picker picker-hidden" id="picker2" name="2"></div>             
             </div>
         </center>
         <center>
             <div class="shelf" number="3">
                 <div class="strip"></div>
                 <h1>Shelf 3</h1>
-                <div class="picker" id="picker3" name="3"></div>                
+                <div class="picker picker-hidden" id="picker3" name="3"></div>                
             </div>
         </center>
         <center>
             <div class="shelf" number="4">
                 <div class="strip"></div>
                 <h1>Shelf 4</h1>
-                <div class="picker" id="picker4" name="4"></div>  
+                <div class="picker picker-hidden" id="picker4" name="4"></div>  
             </div>
         </center>
         <center>
             <div class="shelf" number="5">
                 <div class="strip"></div>
                 <h1>Shelf 5</h1>
-                <div class="picker" id="picker5" name="5"></div>  
+                <div class="picker picker-hidden" id="picker5" name="5"></div>  
                
             </div>
         </center>
@@ -48,49 +48,49 @@
             <div class="shelf" number="6">
                 <div class="strip"></div>
                 <h1>Shelf 6</h1>
-                <div class="picker" id="picker6" name="6"></div>  
+                <div class="picker picker-hidden" id="picker6" name="6"></div>  
             </div>
         </center>
         <center>
             <div class="shelf" number="7">
                 <div class="strip"></div>
                 <h1>Shelf 7</h1>
-                <div class="picker" id="picker7" name="7"></div>  
+                <div class="picker picker-hidden" id="picker7" name="7"></div>  
             </div>
         </center>
         <center>
             <div class="shelf" number="8">
                 <div class="strip"></div>
                 <h1>Shelf 8</h1>
-                <div class="picker" id="picker8" name="8"></div>  
+                <div class="picker picker-hidden" id="picker8" name="8"></div>  
             </div>
         </center>
         <center>
             <div class="shelf" number="9">
                 <div class="strip"></div>
                 <h1>Shelf 9</h1>
-                <div class="picker" id="picker9" name="9"></div>  
+                <div class="picker picker-hidden" id="picker9" name="9"></div>  
             </div>
         </center>
         <center>
             <div class="shelf"name="10">
                 <div class="strip"></div>
                 <h1>Floor Left </h1>
-                <div class="picker" id="picker10" name="10"></div>  
+                <div class="picker picker-hidden" id="picker10" name="10"></div>  
             </div>
         </center>
         <center>
             <div class="shelf" name="11">
                 <div class="strip"></div>
                 <h1>Floor Middle </h1>
-                <div class="picker" id="picker11" name="11"></div>  
+                <div class="picker picker-hidden" id="picker11" name="11"></div>  
             </div>
         </center>
         <center>
             <div class="shelf">
                 <div class="strip"></div>
                 <h1>Floor Right </h1>
-                <div class="picker" id="picker12" name="12"></div>
+                <div class="picker picker-hidden" id="picker12" name="12"></div>
                 <!-- <form id="FloorRightLights">
                     <input type="color" id="shelfColor" value="ff0000" name="FloorRight">
                     <input type="submit" value="Run Lights" />
@@ -125,14 +125,6 @@
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script type="text/javascript">
-            $(document).ready(function(){
-                console.log("hiding pickers")
-                const pickers = $(".picker")
-                pickers.each(function(index, picker){
-                    $(picker).toggle();
-                });
-            });
-
             function setStripColor(shelf, hexColor) {
                 $('.shelf[number=' + shelf + '] .strip').css('background', hexColor);
             }
@@ -233,18 +225,19 @@
                 console.log(event);
 
                 const shelf = event.currentTarget;
-                const picker = $(shelf).find('.picker .IroColorPicker')[0];
-                const pickerBounds = picker.getBoundingClientRect();
+                const picker = $(shelf).find('.picker')[0];
+                const iroColorPicker = $(picker).find('.IroColorPicker')[0];
+                const iroPickerBounds = iroColorPicker.getBoundingClientRect();
 
                 if (
-                    event.pageX >= pickerBounds.x && 
-                    event.pageY >= pickerBounds.y && 
-                    event.pageX <= pickerBounds.x + pickerBounds.width &&
-                    event.pageY <= pickerBounds.y + pickerBounds.height
+                    event.pageX >= iroPickerBounds.x && 
+                    event.pageY >= iroPickerBounds.y && 
+                    event.pageX <= iroPickerBounds.x + iroPickerBounds.width &&
+                    event.pageY <= iroPickerBounds.y + iroPickerBounds.height
                 ) {
                     console.log('Nah mate');
-                } else {                    
-                    $(picker).toggle;
+                } else {
+                    $(picker).toggleClass('picker-hidden');
                 }
             });
 

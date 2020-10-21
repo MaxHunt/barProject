@@ -35,11 +35,13 @@ shelf9 = (192,215)
 floorLeft = (216,239)
 floorMiddle = (240,275)
 floorRight = (276,299)
+#BlackBoard
+blackBoard=(300,449)
 #Board pin
 pixel_pin = board.D18
 
 # The number of NeoPixels
-num_pixels = 300
+num_pixels = 450
  
 # The order of the pixel colors - RGB or GRB. Some NeoPixels have red and green reversed!
 # For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
@@ -191,11 +193,11 @@ def shelfLights():
         setColourShelf(shelf8,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
     elif (json["shelf"]=="9"): 
         setColourShelf(shelf9,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
-    elif (json["shelf"]=="FloorLeft"): 
+    elif (json["shelf"]=="10"): 
         setColourShelf(floorLeft,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
-    elif (json["shelf"]=="FloorMiddle"): 
+    elif (json["shelf"]=="11"): 
         setColourShelf(floorMiddle,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
-    elif (json["shelf"]=="FloorRight"): 
+    elif (json["shelf"]=="12"): 
         setColourShelf(floorRight,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
     else:
         print("No Action")    
@@ -239,6 +241,7 @@ def shelfRandomColours():
     setColourShelf(floorLeft,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))
     setColourShelf(floorMiddle,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))
     setColourShelf(floorRight,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))
+    setColourShelf(blackBoard,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))
     print ("Lights Stopped")    
     return ("Success"), 204
 

@@ -34,7 +34,11 @@
     margin-bottom: 6px;
 }
 
-#picker {
+.picker {
     display: flex;
     justify-content: center;
+}
+
+.pickerhidden{
+    display: none !important;
 }

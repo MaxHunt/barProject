@@ -1,11 +1,14 @@
 <!DOCTYPE HTML>
 <html>
     <head>
+        <title>Max's Bar</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
             integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ url_for('static',filename='mainstyle.css') }}">
         <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
         <center>
@@ -14,79 +17,57 @@
                 <h1>Shelf 1</h1>
                 <div class="picker picker-hidden" id="picker1" name="1"></div>                
             </div>
-        </center>
-        <center>
             <div class="shelf" number="2">
                 <div class="strip"></div>
                 <h1>Shelf 2</h1>
                 <div class="picker picker-hidden" id="picker2" name="2"></div>             
             </div>
-        </center>
-        <center>
             <div class="shelf" number="3">
                 <div class="strip"></div>
                 <h1>Shelf 3</h1>
                 <div class="picker picker-hidden" id="picker3" name="3"></div>                
             </div>
-        </center>
-        <center>
             <div class="shelf" number="4">
                 <div class="strip"></div>
                 <h1>Shelf 4</h1>
                 <div class="picker picker-hidden" id="picker4" name="4"></div>  
             </div>
-        </center>
-        <center>
             <div class="shelf" number="5">
                 <div class="strip"></div>
                 <h1>Shelf 5</h1>
                 <div class="picker picker-hidden" id="picker5" name="5"></div>  
                
             </div>
-        </center>
-        <center>
             <div class="shelf" number="6">
                 <div class="strip"></div>
                 <h1>Shelf 6</h1>
                 <div class="picker picker-hidden" id="picker6" name="6"></div>  
             </div>
-        </center>
-        <center>
             <div class="shelf" number="7">
                 <div class="strip"></div>
                 <h1>Shelf 7</h1>
                 <div class="picker picker-hidden" id="picker7" name="7"></div>  
             </div>
-        </center>
-        <center>
             <div class="shelf" number="8">
                 <div class="strip"></div>
                 <h1>Shelf 8</h1>
                 <div class="picker picker-hidden" id="picker8" name="8"></div>  
             </div>
-        </center>
-        <center>
             <div class="shelf" number="9">
                 <div class="strip"></div>
                 <h1>Shelf 9</h1>
                 <div class="picker picker-hidden" id="picker9" name="9"></div>  
             </div>
-        </center>
-        <center>
             <div class="shelf"name="10">
                 <div class="strip"></div>
                 <h1>Floor Left </h1>
                 <div class="picker picker-hidden" id="picker10" name="10"></div>  
             </div>
-        </center>
-        <center>
             <div class="shelf" name="11">
                 <div class="strip"></div>
                 <h1>Floor Middle </h1>
                 <div class="picker picker-hidden" id="picker11" name="11"></div>  
             </div>
-        </center>
-        <center>
             <div class="shelf">
                 <div class="strip"></div>
                 <h1>Floor Right </h1>
@@ -96,31 +77,34 @@
                     <input type="submit" value="Run Lights" />
                 </form> -->
             </div>
-        </center>
-        <center>
             <div class="shelf">
                 <div class="strip"></div>
                 <h1>The Bar</h1>
                 <form id="allLightsOn">
-                    <input type="submit" value="Run Lights" />
+                    <input type="submit" value="Run Lights" class="pure-button" />
                 </form>
 
                 <form id="allLightsOff">
-                    <input type="submit" value="Stop Lights" />
+                    <input type="submit" value="Stop Lights" class="pure-button" />
                 </form>
 
                 <form id="movingLEDrun">
-                    <input type="submit" value="Moving LEDs" />
+                    <input type="submit" value="Moving LEDs" class="pure-button" />
                 </form>
 
                 <form id="shelfRandomColours">
-                    <input type="submit" value="Shelf Random Colours" />
+                    <input type="submit" value="Shelf Random Colours" class="pure-button" />
                 </form>
 
                 <form id="rainbow">
-                    <input type="submit" value="Rainbow Cycle" />
+                    <input type="submit" value="Rainbow Cycle" class="pure-button" />
+                </form>
+
+                <form id="decanter">
+                    <input id="decanter" type="submit" value="Decanter" class="pure-button"/>
                 </form>
             </div>
+            <audio id="starwars" src="https://www.soundboard.com/mediafiles/nz/NzgyNjE2Mzc4MjczNw_uPjBRei6KIc.mp3" />
         </center>
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -128,7 +112,7 @@
             function setStripColor(shelf, hexColor) {
                 $('.shelf[number=' + shelf + '] .strip').css('background', hexColor);
             }
-            //Shelfs
+            //Shelves
             var colorPicker1 = new iro.ColorPicker('#picker1');
             var colorPicker2 = new iro.ColorPicker('#picker2');
             var colorPicker3 = new iro.ColorPicker('#picker3');
@@ -221,12 +205,21 @@
                 } : null;
             }
 
-            $(".shelf").click(function(event) {
-                console.log(event);
+            $("#decanter").click(function(e) {
+                e.preventDefault();
+                const starWars = document.getElementById('starwars');
+                starWars.paused ? starWars.play() : starWars.pause();
+            });
 
+            $(".shelf").click(function(event) {
                 const shelf = event.currentTarget;
                 const picker = $(shelf).find('.picker')[0];
                 const iroColorPicker = $(picker).find('.IroColorPicker')[0];
+
+                if (!iroColorPicker) {
+                    return;
+                }
+
                 const iroPickerBounds = iroColorPicker.getBoundingClientRect();
 
                 if (

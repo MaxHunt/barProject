@@ -14,6 +14,11 @@
 
 <body>
     <center>
+        <div class="shelf" id="preset-dropdown-container">
+            <div class="strip"></div>
+            <h1>Presets</h1>
+            <select name="presets" id="preset-dropdown"></select>
+        </div>
         <div class="shelf" number="1">
             <div class="strip"></div>
             <h1>Shelf 1</h1>
@@ -113,6 +118,25 @@
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="../static/presets.js" type="text/javascript"></script>
     <script type="text/javascript">
+        $(document).ready(function() {
+            buildPresetDropdown();
+        });
+
+        function buildPresetDropdown() {
+            let presetOptions = '';
+            presets.forEach((preset) => {
+                $('#preset-dropdown').append(`<option value="${preset.name.toLowerCase()}">${preset.name}</option>`);
+            });
+        }
+
+        $('#preset-dropdown').on('change', function () {
+            for (let i = 0; i < presets.length; i++) {
+                if (presets[i].name.toLowerCase() === this.value) {
+                    setPreset(presets[i]);
+                }
+            }
+        });
+
         function setStripColor(shelf, hexColor) {
             $('.shelf[number=' + shelf + '] .strip').css('background', hexColor);
         }
@@ -150,7 +174,6 @@
 
             setShelfLights(13, preset.blackboard.r, preset.blackboard.g, preset.blackboard.b);
             // Set Color Pickers: TODO
-            // Set Lights: TODO
         }
 
         function setShelfLights(shelf, r, g, b) {

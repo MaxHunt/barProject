@@ -14,6 +14,27 @@
 
 <body>
     <center>
+        <div class="shelf" id="bar-container">
+            <img class="logo" src="/static/BarLogo.jpg">
+            <form id="allLightsOn">
+                <input type="submit" value="Run Lights" class="pure-button" />
+            </form>
+            <form id="allLightsOff">
+                <input type="submit" value="Stop Lights" class="pure-button" />
+            </form>
+            <form id="movingLEDrun">
+                <input type="submit" value="Moving LEDs" class="pure-button" />
+            </form>
+            <form id="shelfRandomColours">
+                <input type="submit" value="Shelf Random Colours" class="pure-button" />
+            </form>
+            <form id="rainbow">
+                <input type="submit" value="Rainbow Cycle" class="pure-button" />
+            </form>
+            <form id="decanter">
+                <input id="decanter" type="submit" value="Decanter" class="pure-button" />
+            </form>
+        </div>
         <div class="shelf" id="preset-dropdown-container">
             <div class="strip"></div>
             <h1>Presets</h1>
@@ -84,33 +105,6 @@
             <h1>Black Board </h1>
             <div class="picker picker-hidden" id="picker13" name="13"></div>
         </div>
-        <div class="shelf">
-            <div class="strip"></div>
-            <img class="logo" src="/static/BarLogo.jpg">
-            <form id="allLightsOn">
-                <input type="submit" value="Run Lights" class="pure-button" />
-            </form>
-
-            <form id="allLightsOff">
-                <input type="submit" value="Stop Lights" class="pure-button" />
-            </form>
-
-            <form id="movingLEDrun">
-                <input type="submit" value="Moving LEDs" class="pure-button" />
-            </form>
-
-            <form id="shelfRandomColours">
-                <input type="submit" value="Shelf Random Colours" class="pure-button" />
-            </form>
-
-            <form id="rainbow">
-                <input type="submit" value="Rainbow Cycle" class="pure-button" />
-            </form>
-
-            <form id="decanter">
-                <input id="decanter" type="submit" value="Decanter" class="pure-button" />
-            </form>
-        </div>
         <audio id="starwars" src="https://www.soundboard.com/mediafiles/nz/NzgyNjE2Mzc4MjczNw_uPjBRei6KIc.mp3" />
 
     </center>
@@ -118,7 +112,7 @@
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="../static/presets.js" type="text/javascript"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             buildPresetDropdown();
         });
 
@@ -265,7 +259,7 @@
 
             setStripColor(shelf, selectedColor);
 
-            
+
 
             $.ajax({
                 type: 'POST',

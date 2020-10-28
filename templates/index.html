@@ -53,11 +53,6 @@
                 <h1>Shelf 8</h1>
                 <div class="picker picker-hidden" id="picker8" name="8"></div>  
             </div>
-            <div class="shelf" number="9">
-                <div class="strip"></div>
-                <h1>Shelf 9</h1>
-                <div class="picker picker-hidden" id="picker9" name="9"></div>  
-            </div>
             <div class="shelf"name="10">
                 <div class="strip"></div>
                 <h1>Floor Left </h1>
@@ -68,7 +63,7 @@
                 <h1>Floor Middle </h1>
                 <div class="picker picker-hidden" id="picker11" name="11"></div>  
             </div>
-            <div class="shelf">
+            <div class="shelf" name="12">
                 <div class="strip"></div>
                 <h1>Floor Right </h1>
                 <div class="picker picker-hidden" id="picker12" name="12"></div>
@@ -76,6 +71,11 @@
                     <input type="color" id="shelfColor" value="ff0000" name="FloorRight">
                     <input type="submit" value="Run Lights" />
                 </form> -->
+            </div>
+            <div class="shelf" name="13">
+                <div class="strip"></div>
+                <h1>Black Board </h1>
+                <div class="picker picker-hidden" id="picker13" name="13"></div>
             </div>
             <div class="shelf">
                 <div class="strip"></div>
@@ -105,6 +105,7 @@
                 </form>
             </div>
             <audio id="starwars" src="https://www.soundboard.com/mediafiles/nz/NzgyNjE2Mzc4MjczNw_uPjBRei6KIc.mp3" />
+            
         </center>
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -120,12 +121,13 @@
             var colorPicker5 = new iro.ColorPicker('#picker5');
             var colorPicker6 = new iro.ColorPicker('#picker6');
             var colorPicker7 = new iro.ColorPicker('#picker7');
-            var colorPicker8 = new iro.ColorPicker('#picker8');
-            var colorPicker9 = new iro.ColorPicker('#picker9');
+            var colorPicker8 = new iro.ColorPicker('#picker8');            
             // //Floor
             var colorPicker10 = new iro.ColorPicker('#picker10');
             var colorPicker11 = new iro.ColorPicker('#picker11');
             var colorPicker12 = new iro.ColorPicker('#picker12');
+            //Blackboard
+            var colorPicker13 = new iro.ColorPicker('#picker13');
             //Bar
             
 
@@ -155,9 +157,6 @@
             colorPicker8.on('color:change', function (color) {
                 selectedColor = color.hexString;
             });
-            colorPicker9.on('color:change', function (color) {
-                selectedColor = color.hexString;
-            });
             colorPicker10.on('color:change', function (color) {
                 selectedColor = color.hexString;
             });
@@ -165,6 +164,9 @@
                 selectedColor = color.hexString;
             });
             colorPicker12.on('color:change', function (color) {
+                selectedColor = color.hexString;
+            });
+            colorPicker13.on('color:change', function (color) {
                 selectedColor = color.hexString;
             });
 

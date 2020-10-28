@@ -30,13 +30,12 @@ shelf5 = (96,119)
 shelf6 = (120,143)
 shelf7 = (144,167)
 shelf8 = (168,191)
-shelf9 = (192,215)
 #Floor Boards
-floorLeft = (216,239)
-floorMiddle = (240,275)
-floorRight = (276,299)
+floorLeft = (192,215)
+floorMiddle = (216,273)
+floorRight = (274,298)
 #BlackBoard
-blackBoard=(300,449)
+blackBoard=(299,449)
 #Board pin
 pixel_pin = board.D18
 
@@ -191,14 +190,14 @@ def shelfLights():
         setColourShelf(shelf7,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
     elif (json["shelf"]=="8"): 
         setColourShelf(shelf8,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
-    elif (json["shelf"]=="9"): 
-        setColourShelf(shelf9,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
     elif (json["shelf"]=="10"): 
         setColourShelf(floorLeft,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
     elif (json["shelf"]=="11"): 
         setColourShelf(floorMiddle,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
     elif (json["shelf"]=="12"): 
         setColourShelf(floorRight,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
+    elif (json["shelf"]=="13"): 
+        setColourShelf(blackBoard,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
     else:
         print("No Action")    
     print("Lights Started")
@@ -237,7 +236,6 @@ def shelfRandomColours():
     setColourShelf(shelf6,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))
     setColourShelf(shelf7,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))
     setColourShelf(shelf8,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))
-    setColourShelf(shelf9,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))
     setColourShelf(floorLeft,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))
     setColourShelf(floorMiddle,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))
     setColourShelf(floorRight,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))

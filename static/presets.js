@@ -187,5 +187,68 @@ const presets = [
       g: 242,
       b: 19
     }
+  },
+  {
+    name: 'Rainbow',
+    shelf1: {
+      r: 242,
+      g: 19,
+      b: 26
+    },
+    shelf2: {
+      r: 242,
+      g: 19,
+      b: 138
+    },
+    shelf3: {
+      r: 234,
+      g: 19,
+      b: 242
+    },
+    shelf4: {
+      r: 130,
+      g: 19,
+      b: 242
+    },
+    shelf5: {
+      r: 19,
+      g: 167,
+      b: 242
+    },
+    shelf6: {
+      r: 19,
+      g: 242,
+      b: 175
+    },
+    shelf7: {
+      r: 19,
+      g: 242,
+      b: 63
+    },
+    shelf8: {
+      r: 130,
+      g: 242,
+      b: 19
+    },
+    floorLeft: {
+      r: 242,
+      g: 234,
+      b: 19
+    },
+    floorMiddle: {
+      r: 242,
+      g: 175,
+      b: 19
+    },
+    floorRight: {
+      r: 242,
+      g: 93,
+      b: 19
+    },
+    blackboard: {
+      r: 19,
+      g: 26,
+      b: 242
+    }
   }
 ];

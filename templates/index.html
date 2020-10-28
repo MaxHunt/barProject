@@ -265,19 +265,19 @@
 
             setStripColor(shelf, selectedColor);
 
+            
+
             $.ajax({
                 type: 'POST',
                 url: '/api/shelfLights',
-                dataType: 'String',
+                dataType: 'text',
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(data),
-                success: function (callback) {
-                    console.log(callback);
-                    // Watch out for Cross Site Scripting security issues when setting dynamic content!
-                    $(this).html("They are on");
+                success: function (response) {
+                    console.log(`${response} - Shelf ${shelf} set to a colour`);
                 },
                 error: function () {
-                    $(this).html("error!");
+                    console.log($`Couldn't set Shelf ${shelf} colour`);
                 }
             });
         });

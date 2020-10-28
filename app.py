@@ -199,9 +199,9 @@ def shelfLights():
     elif (json["shelf"]=="13"): 
         setColourShelf(blackBoard,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
     else:
-        print("No Action")    
+        print("No Action") 
     print("Lights Started")
-    return ("Success"), 204
+    return ("Success"), 200
 
 @app.route('/api/allLightsOn', methods=['POST'])
 def allLightsOn():      

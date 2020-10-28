@@ -53,11 +53,6 @@
                 <h1>Shelf 8</h1>
                 <div class="picker picker-hidden" id="picker8" name="8"></div>  
             </div>
-            <div class="shelf" number="9">
-                <div class="strip"></div>
-                <h1>Shelf 9</h1>
-                <div class="picker picker-hidden" id="picker9" name="9"></div>  
-            </div>
             <div class="shelf"name="10">
                 <div class="strip"></div>
                 <h1>Floor Left </h1>
@@ -120,8 +115,7 @@
             var colorPicker5 = new iro.ColorPicker('#picker5');
             var colorPicker6 = new iro.ColorPicker('#picker6');
             var colorPicker7 = new iro.ColorPicker('#picker7');
-            var colorPicker8 = new iro.ColorPicker('#picker8');
-            var colorPicker9 = new iro.ColorPicker('#picker9');
+            var colorPicker8 = new iro.ColorPicker('#picker8');            
             // //Floor
             var colorPicker10 = new iro.ColorPicker('#picker10');
             var colorPicker11 = new iro.ColorPicker('#picker11');
@@ -153,9 +147,6 @@
                 selectedColor = color.hexString;
             });
             colorPicker8.on('color:change', function (color) {
-                selectedColor = color.hexString;
-            });
-            colorPicker9.on('color:change', function (color) {
                 selectedColor = color.hexString;
             });
             colorPicker10.on('color:change', function (color) {

@@ -30,13 +30,12 @@ shelf5 = (96,119)
 shelf6 = (120,143)
 shelf7 = (144,167)
 shelf8 = (168,191)
-shelf9 = (192,215)
 #Floor Boards
-floorLeft = (216,239)
-floorMiddle = (240,275)
-floorRight = (276,299)
+floorLeft = (192,215)
+floorMiddle = (216,273)
+floorRight = (274,298)
 #BlackBoard
-blackBoard=(300,449)
+blackBoard=(299,449)
 #Board pin
 pixel_pin = board.D18
 
@@ -191,8 +190,6 @@ def shelfLights():
         setColourShelf(shelf7,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
     elif (json["shelf"]=="8"): 
         setColourShelf(shelf8,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
-    elif (json["shelf"]=="9"): 
-        setColourShelf(shelf9,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
     elif (json["shelf"]=="10"): 
         setColourShelf(floorLeft,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
     elif (json["shelf"]=="11"): 

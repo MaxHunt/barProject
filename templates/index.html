@@ -63,7 +63,7 @@
                 <h1>Floor Middle </h1>
                 <div class="picker picker-hidden" id="picker11" name="11"></div>  
             </div>
-            <div class="shelf">
+            <div class="shelf" name="12">
                 <div class="strip"></div>
                 <h1>Floor Right </h1>
                 <div class="picker picker-hidden" id="picker12" name="12"></div>
@@ -71,6 +71,11 @@
                     <input type="color" id="shelfColor" value="ff0000" name="FloorRight">
                     <input type="submit" value="Run Lights" />
                 </form> -->
+            </div>
+            <div class="shelf" name="13">
+                <div class="strip"></div>
+                <h1>Black Board </h1>
+                <div class="picker picker-hidden" id="picker13" name="13"></div>
             </div>
             <div class="shelf">
                 <div class="strip"></div>
@@ -100,6 +105,7 @@
                 </form>
             </div>
             <audio id="starwars" src="https://www.soundboard.com/mediafiles/nz/NzgyNjE2Mzc4MjczNw_uPjBRei6KIc.mp3" />
+            
         </center>
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -120,6 +126,8 @@
             var colorPicker10 = new iro.ColorPicker('#picker10');
             var colorPicker11 = new iro.ColorPicker('#picker11');
             var colorPicker12 = new iro.ColorPicker('#picker12');
+            //Blackboard
+            var colorPicker13 = new iro.ColorPicker('#picker13');
             //Bar
             
 
@@ -156,6 +164,9 @@
                 selectedColor = color.hexString;
             });
             colorPicker12.on('color:change', function (color) {
+                selectedColor = color.hexString;
+            });
+            colorPicker13.on('color:change', function (color) {
                 selectedColor = color.hexString;
             });
 

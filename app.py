@@ -196,6 +196,8 @@ def shelfLights():
         setColourShelf(floorMiddle,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
     elif (json["shelf"]=="12"): 
         setColourShelf(floorRight,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
+    elif (json["shelf"]=="13"): 
+        setColourShelf(blackBoard,json["colour"]["r"],json["colour"]["g"],json["colour"]["b"])
     else:
         print("No Action")    
     print("Lights Started")
@@ -234,7 +236,6 @@ def shelfRandomColours():
     setColourShelf(shelf6,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))
     setColourShelf(shelf7,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))
     setColourShelf(shelf8,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))
-    setColourShelf(shelf9,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))
     setColourShelf(floorLeft,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))
     setColourShelf(floorMiddle,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))
     setColourShelf(floorRight,(random.randint(0, 255)),(random.randint(0, 255)),(random.randint(0, 255)))

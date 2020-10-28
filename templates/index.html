@@ -1,378 +1,403 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <title>Max's Bar</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
-            integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ url_for('static',filename='mainstyle.css') }}">
-        <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
-    </head>
-    <body>
-        <center>            
-            <div class="shelf" number="1">
-                <div class="strip"></div>
-                <h1>Shelf 1</h1>
-                <div class="picker picker-hidden" id="picker1" name="1"></div>                
-            </div>
-            <div class="shelf" number="2">
-                <div class="strip"></div>
-                <h1>Shelf 2</h1>
-                <div class="picker picker-hidden" id="picker2" name="2"></div>             
-            </div>
-            <div class="shelf" number="3">
-                <div class="strip"></div>
-                <h1>Shelf 3</h1>
-                <div class="picker picker-hidden" id="picker3" name="3"></div>                
-            </div>
-            <div class="shelf" number="4">
-                <div class="strip"></div>
-                <h1>Shelf 4</h1>
-                <div class="picker picker-hidden" id="picker4" name="4"></div>  
-            </div>
-            <div class="shelf" number="5">
-                <div class="strip"></div>
-                <h1>Shelf 5</h1>
-                <div class="picker picker-hidden" id="picker5" name="5"></div>  
-               
-            </div>
-            <div class="shelf" number="6">
-                <div class="strip"></div>
-                <h1>Shelf 6</h1>
-                <div class="picker picker-hidden" id="picker6" name="6"></div>  
-            </div>
-            <div class="shelf" number="7">
-                <div class="strip"></div>
-                <h1>Shelf 7</h1>
-                <div class="picker picker-hidden" id="picker7" name="7"></div>  
-            </div>
-            <div class="shelf" number="8">
-                <div class="strip"></div>
-                <h1>Shelf 8</h1>
-                <div class="picker picker-hidden" id="picker8" name="8"></div>  
-            </div>
-            <div class="shelf"name="10">
-                <div class="strip"></div>
-                <h1>Floor Left </h1>
-                <div class="picker picker-hidden" id="picker10" name="10"></div>  
-            </div>
-            <div class="shelf" name="11">
-                <div class="strip"></div>
-                <h1>Floor Middle </h1>
-                <div class="picker picker-hidden" id="picker11" name="11"></div>  
-            </div>
-            <div class="shelf" name="12">
-                <div class="strip"></div>
-                <h1>Floor Right </h1>
-                <div class="picker picker-hidden" id="picker12" name="12"></div>
-                <!-- <form id="FloorRightLights">
+<head>
+    <title>Max's Bar</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+        integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='mainstyle.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+</head>
+
+<body>
+    <center>
+        <div class="shelf" number="1">
+            <div class="strip"></div>
+            <h1>Shelf 1</h1>
+            <div class="picker picker-hidden" id="picker1" name="1"></div>
+        </div>
+        <div class="shelf" number="2">
+            <div class="strip"></div>
+            <h1>Shelf 2</h1>
+            <div class="picker picker-hidden" id="picker2" name="2"></div>
+        </div>
+        <div class="shelf" number="3">
+            <div class="strip"></div>
+            <h1>Shelf 3</h1>
+            <div class="picker picker-hidden" id="picker3" name="3"></div>
+        </div>
+        <div class="shelf" number="4">
+            <div class="strip"></div>
+            <h1>Shelf 4</h1>
+            <div class="picker picker-hidden" id="picker4" name="4"></div>
+        </div>
+        <div class="shelf" number="5">
+            <div class="strip"></div>
+            <h1>Shelf 5</h1>
+            <div class="picker picker-hidden" id="picker5" name="5"></div>
+
+        </div>
+        <div class="shelf" number="6">
+            <div class="strip"></div>
+            <h1>Shelf 6</h1>
+            <div class="picker picker-hidden" id="picker6" name="6"></div>
+        </div>
+        <div class="shelf" number="7">
+            <div class="strip"></div>
+            <h1>Shelf 7</h1>
+            <div class="picker picker-hidden" id="picker7" name="7"></div>
+        </div>
+        <div class="shelf" number="8">
+            <div class="strip"></div>
+            <h1>Shelf 8</h1>
+            <div class="picker picker-hidden" id="picker8" name="8"></div>
+        </div>
+        <div class="shelf" number="10">
+            <div class="strip"></div>
+            <h1>Floor Left </h1>
+            <div class="picker picker-hidden" id="picker10" name="10"></div>
+        </div>
+        <div class="shelf" number="11">
+            <div class="strip"></div>
+            <h1>Floor Middle </h1>
+            <div class="picker picker-hidden" id="picker11" name="11"></div>
+        </div>
+        <div class="shelf" number="12">
+            <div class="strip"></div>
+            <h1>Floor Right </h1>
+            <div class="picker picker-hidden" id="picker12" name="12"></div>
+            <!-- <form id="FloorRightLights">
                     <input type="color" id="shelfColor" value="ff0000" name="FloorRight">
                     <input type="submit" value="Run Lights" />
                 </form> -->
-            </div>
-            <div class="shelf" name="13">
-                <div class="strip"></div>
-                <h1>Black Board </h1>
-                <div class="picker picker-hidden" id="picker13" name="13"></div>
-            </div>
-            <div class="shelf">
-                <div class="strip"></div>
-                <img class="logo" src="/static/BarLogo.jpg">
-                <form id="allLightsOn">
-                    <input type="submit" value="Run Lights" class="pure-button" />
-                </form>
+        </div>
+        <div class="shelf" number="13">
+            <div class="strip"></div>
+            <h1>Black Board </h1>
+            <div class="picker picker-hidden" id="picker13" name="13"></div>
+        </div>
+        <div class="shelf">
+            <div class="strip"></div>
+            <img class="logo" src="/static/BarLogo.jpg">
+            <form id="allLightsOn">
+                <input type="submit" value="Run Lights" class="pure-button" />
+            </form>
 
-                <form id="allLightsOff">
-                    <input type="submit" value="Stop Lights" class="pure-button" />
-                </form>
+            <form id="allLightsOff">
+                <input type="submit" value="Stop Lights" class="pure-button" />
+            </form>
 
-                <form id="movingLEDrun">
-                    <input type="submit" value="Moving LEDs" class="pure-button" />
-                </form>
+            <form id="movingLEDrun">
+                <input type="submit" value="Moving LEDs" class="pure-button" />
+            </form>
 
-                <form id="shelfRandomColours">
-                    <input type="submit" value="Shelf Random Colours" class="pure-button" />
-                </form>
+            <form id="shelfRandomColours">
+                <input type="submit" value="Shelf Random Colours" class="pure-button" />
+            </form>
 
-                <form id="rainbow">
-                    <input type="submit" value="Rainbow Cycle" class="pure-button" />
-                </form>
+            <form id="rainbow">
+                <input type="submit" value="Rainbow Cycle" class="pure-button" />
+            </form>
 
-                <form id="decanter">
-                    <input id="decanter" type="submit" value="Decanter" class="pure-button"/>
-                </form>
-            </div>
-            <audio id="starwars" src="https://www.soundboard.com/mediafiles/nz/NzgyNjE2Mzc4MjczNw_uPjBRei6KIc.mp3" />
-            
-        </center>
+            <form id="decanter">
+                <input id="decanter" type="submit" value="Decanter" class="pure-button" />
+            </form>
+        </div>
+        <audio id="starwars" src="https://www.soundboard.com/mediafiles/nz/NzgyNjE2Mzc4MjczNw_uPjBRei6KIc.mp3" />
 
-        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script type="text/javascript">
-            function setStripColor(shelf, hexColor) {
-                $('.shelf[number=' + shelf + '] .strip').css('background', hexColor);
-            }
-            //Shelves
-            var colorPicker1 = new iro.ColorPicker('#picker1');
-            var colorPicker2 = new iro.ColorPicker('#picker2');
-            var colorPicker3 = new iro.ColorPicker('#picker3');
-            var colorPicker4 = new iro.ColorPicker('#picker4');
-            var colorPicker5 = new iro.ColorPicker('#picker5');
-            var colorPicker6 = new iro.ColorPicker('#picker6');
-            var colorPicker7 = new iro.ColorPicker('#picker7');
-            var colorPicker8 = new iro.ColorPicker('#picker8');            
-            // //Floor
-            var colorPicker10 = new iro.ColorPicker('#picker10');
-            var colorPicker11 = new iro.ColorPicker('#picker11');
-            var colorPicker12 = new iro.ColorPicker('#picker12');
-            //Blackboard
-            var colorPicker13 = new iro.ColorPicker('#picker13');
-            //Bar
-            
+    </center>
 
-            let selectedColor = '#000000';
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="../static/presets.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function setStripColor(shelf, hexColor) {
+            $('.shelf[number=' + shelf + '] .strip').css('background', hexColor);
+        }
 
-            colorPicker1.on('color:change', function (color) {
-                selectedColor = color.hexString;
-             });
-            colorPicker2.on('color:change', function (color) {
-                selectedColor = color.hexString;
-            });
-            colorPicker3.on('color:change', function (color) {
-                selectedColor = color.hexString;
-            });
-            colorPicker4.on('color:change', function (color) {
-                selectedColor = color.hexString;
-            });
-            colorPicker5.on('color:change', function (color) {
-                selectedColor = color.hexString;
-            });
-            colorPicker6.on('color:change', function (color) {
-                selectedColor = color.hexString;
-            });
-            colorPicker7.on('color:change', function (color) {
-                selectedColor = color.hexString;
-            });
-            colorPicker8.on('color:change', function (color) {
-                selectedColor = color.hexString;
-            });
-            colorPicker10.on('color:change', function (color) {
-                selectedColor = color.hexString;
-            });
-            colorPicker11.on('color:change', function (color) {
-                selectedColor = color.hexString;
-            });
-            colorPicker12.on('color:change', function (color) {
-                selectedColor = color.hexString;
-            });
-            colorPicker13.on('color:change', function (color) {
-                selectedColor = color.hexString;
-            });
+        function setPreset(preset) {
+            // Set strips
+            setStripColor(1, `rgb(${preset.shelf1.r}, ${preset.shelf1.g}, ${preset.shelf1.b}`);
+            setStripColor(2, `rgb(${preset.shelf2.r}, ${preset.shelf2.g}, ${preset.shelf2.b}`);
+            setStripColor(3, `rgb(${preset.shelf3.r}, ${preset.shelf3.g}, ${preset.shelf3.b}`);
+            setStripColor(4, `rgb(${preset.shelf4.r}, ${preset.shelf4.g}, ${preset.shelf4.b}`);
+            setStripColor(5, `rgb(${preset.shelf5.r}, ${preset.shelf5.g}, ${preset.shelf5.b}`);
+            setStripColor(6, `rgb(${preset.shelf6.r}, ${preset.shelf6.g}, ${preset.shelf6.b}`);
+            setStripColor(7, `rgb(${preset.shelf7.r}, ${preset.shelf7.g}, ${preset.shelf7.b}`);
+            setStripColor(8, `rgb(${preset.shelf8.r}, ${preset.shelf8.g}, ${preset.shelf8.b}`);
+
+            setStripColor(10, `rgb(${preset.floorLeft.r}, ${preset.floorLeft.g}, ${preset.floorLeft.b}`);
+            setStripColor(11, `rgb(${preset.floorMiddle.r}, ${preset.floorMiddle.g}, ${preset.floorMiddle.b}`);
+            setStripColor(12, `rgb(${preset.floorRight.r}, ${preset.floorRight.g}, ${preset.floorRight.b}`);
+
+            setStripColor(13, `rgb(${preset.blackboard.r}, ${preset.blackboard.g}, ${preset.blackboard.b}`);
+
+            // Set Color Pickers: TODO
+            // Set Lights: TODO
+        }
+
+        //Shelves
+        var colorPicker1 = new iro.ColorPicker('#picker1');
+        var colorPicker2 = new iro.ColorPicker('#picker2');
+        var colorPicker3 = new iro.ColorPicker('#picker3');
+        var colorPicker4 = new iro.ColorPicker('#picker4');
+        var colorPicker5 = new iro.ColorPicker('#picker5');
+        var colorPicker6 = new iro.ColorPicker('#picker6');
+        var colorPicker7 = new iro.ColorPicker('#picker7');
+        var colorPicker8 = new iro.ColorPicker('#picker8');
+        // //Floor
+        var colorPicker10 = new iro.ColorPicker('#picker10');
+        var colorPicker11 = new iro.ColorPicker('#picker11');
+        var colorPicker12 = new iro.ColorPicker('#picker12');
+        //Blackboard
+        var colorPicker13 = new iro.ColorPicker('#picker13');
+        //Bar
+
+        let selectedColor = '#000000';
+
+        colorPicker1.on('color:change', function (color) {
+            selectedColor = color.hexString;
+        });
+        colorPicker2.on('color:change', function (color) {
+            selectedColor = color.hexString;
+        });
+        colorPicker3.on('color:change', function (color) {
+            selectedColor = color.hexString;
+        });
+        colorPicker4.on('color:change', function (color) {
+            selectedColor = color.hexString;
+        });
+        colorPicker5.on('color:change', function (color) {
+            selectedColor = color.hexString;
+        });
+        colorPicker6.on('color:change', function (color) {
+            selectedColor = color.hexString;
+        });
+        colorPicker7.on('color:change', function (color) {
+            selectedColor = color.hexString;
+        });
+        colorPicker8.on('color:change', function (color) {
+            selectedColor = color.hexString;
+        });
+        colorPicker10.on('color:change', function (color) {
+            selectedColor = color.hexString;
+        });
+        colorPicker11.on('color:change', function (color) {
+            selectedColor = color.hexString;
+        });
+        colorPicker12.on('color:change', function (color) {
+            selectedColor = color.hexString;
+        });
+        colorPicker13.on('color:change', function (color) {
+            selectedColor = color.hexString;
+        });
 
 
-            $('.picker').on('pointerup', function (e) {
-                const shelf = e.currentTarget.attributes.getNamedItem('name').value;
+        $('.picker').on('pointerup', function (e) {
+            const shelf = e.currentTarget.attributes.getNamedItem('name').value;
 
-                const data = {
-                    colour: hexToRgb(selectedColor),
-                    shelf: shelf
-                };
+            const data = {
+                colour: hexToRgb(selectedColor),
+                shelf: shelf
+            };
 
-                setStripColor(shelf, selectedColor);
+            setStripColor(shelf, selectedColor);
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/shelfLights',
-                    dataType: 'String',
-                    contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify(data),
-                    success: function (callback) {
-                        console.log(callback);
-                        // Watch out for Cross Site Scripting security issues when setting dynamic content!
-                        $(this).html("They are on");
-                    },
-                    error: function () {
-                        $(this).html("error!");
-                    }
-                });
-            });
-
-            function hexToRgb(hex) {
-                var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-                return result ? {
-                    r: parseInt(result[1], 16),
-                    g: parseInt(result[2], 16),
-                    b: parseInt(result[3], 16)
-                } : null;
-            }
-
-            $("#decanter").click(function(e) {
-                e.preventDefault();
-                const starWars = document.getElementById('starwars');
-                starWars.paused ? starWars.play() : starWars.pause();
-            });
-
-            $(".shelf").click(function(event) {
-                const shelf = event.currentTarget;
-                const picker = $(shelf).find('.picker')[0];
-                const iroColorPicker = $(picker).find('.IroColorPicker')[0];
-
-                if (!iroColorPicker) {
-                    return;
-                }
-
-                const iroPickerBounds = iroColorPicker.getBoundingClientRect();
-
-                if (
-                    event.pageX >= iroPickerBounds.x && 
-                    event.pageY >= iroPickerBounds.y && 
-                    event.pageX <= iroPickerBounds.x + iroPickerBounds.width &&
-                    event.pageY <= iroPickerBounds.y + iroPickerBounds.height
-                ) {
-                    console.log('Nah mate');
-                } else {
-                    $(picker).toggleClass('picker-hidden');
+            $.ajax({
+                type: 'POST',
+                url: '/api/shelfLights',
+                dataType: 'String',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data),
+                success: function (callback) {
+                    console.log(callback);
+                    // Watch out for Cross Site Scripting security issues when setting dynamic content!
+                    $(this).html("They are on");
+                },
+                error: function () {
+                    $(this).html("error!");
                 }
             });
+        });
 
-            // $('#shelfLights1').add('#shelfLights2').add('#shelfLights3').add('#shelfLights4').add('#shelfLights5').add('#shelfLights6').add('#shelfLights7').add('#shelfLights8').add('#shelfLights9').add('#FloorRightLights').add('#FloorLeftLights').add('#FloorMiddleLights').submit(function (e) {
-            //     e.preventDefault();
-            //     var form = $(this);
-            //     var data = {};
-            //     $.each(form, function (index, value) {
-            //         colour = hexToRgb((this.shelfColor).value);
-            //         shelf = (this.shelfColor.name)
-            //         var data = { "colour": colour, "shelf": shelf };
-            //     });
-            //     var data = { "colour": colour, "shelf": shelf };
-            //     console.log(data)
-            //     $.ajax({
-            //         type: 'POST',
-            //         url: '/api/shelfLights',
-            //         dataType: 'String',
-            //         contentType: 'application/json; charset=utf-8',
-            //         data: JSON.stringify(data),
-            //         success: function (callback) {
-            //             console.log(callback);
-            //             // Watch out for Cross Site Scripting security issues when setting dynamic content!
-            //             $(this).html("They are on");
-            //         },
-            //         error: function () {
-            //             $(this).html("error!");
-            //         }
-            //     });
-            // });
+        function hexToRgb(hex) {
+            var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
 
-            $('#allLightsOn').submit(function (e) {
-                e.preventDefault();
+        $("#decanter").click(function (e) {
+            e.preventDefault();
+            const starWars = document.getElementById('starwars');
+            starWars.paused ? starWars.play() : starWars.pause();
+        });
 
-                var data = {};
+        $(".shelf").click(function (event) {
+            const shelf = event.currentTarget;
+            const picker = $(shelf).find('.picker')[0];
+            const iroColorPicker = $(picker).find('.IroColorPicker')[0];
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/allLightsOn',
-                    dataType: 'String',
-                    contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify(data),
-                    success: function (callback) {
-                        console.log(callback);
-                        // Watch out for Cross Site Scripting security issues when setting dynamic content!
-                        $(this).html("They are on");
-                    },
-                    error: function () {
-                        $(this).html("error!");
-                    }
-                });
+            if (!iroColorPicker) {
+                return;
+            }
+
+            const iroPickerBounds = iroColorPicker.getBoundingClientRect();
+
+            if (
+                event.pageX >= iroPickerBounds.x &&
+                event.pageY >= iroPickerBounds.y &&
+                event.pageX <= iroPickerBounds.x + iroPickerBounds.width &&
+                event.pageY <= iroPickerBounds.y + iroPickerBounds.height
+            ) {
+                console.log('Nah mate');
+            } else {
+                $(picker).toggleClass('picker-hidden');
+            }
+        });
+
+        // $('#shelfLights1').add('#shelfLights2').add('#shelfLights3').add('#shelfLights4').add('#shelfLights5').add('#shelfLights6').add('#shelfLights7').add('#shelfLights8').add('#shelfLights9').add('#FloorRightLights').add('#FloorLeftLights').add('#FloorMiddleLights').submit(function (e) {
+        //     e.preventDefault();
+        //     var form = $(this);
+        //     var data = {};
+        //     $.each(form, function (index, value) {
+        //         colour = hexToRgb((this.shelfColor).value);
+        //         shelf = (this.shelfColor.name)
+        //         var data = { "colour": colour, "shelf": shelf };
+        //     });
+        //     var data = { "colour": colour, "shelf": shelf };
+        //     console.log(data)
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '/api/shelfLights',
+        //         dataType: 'String',
+        //         contentType: 'application/json; charset=utf-8',
+        //         data: JSON.stringify(data),
+        //         success: function (callback) {
+        //             console.log(callback);
+        //             // Watch out for Cross Site Scripting security issues when setting dynamic content!
+        //             $(this).html("They are on");
+        //         },
+        //         error: function () {
+        //             $(this).html("error!");
+        //         }
+        //     });
+        // });
+
+        $('#allLightsOn').submit(function (e) {
+            e.preventDefault();
+
+            var data = {};
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/allLightsOn',
+                dataType: 'String',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data),
+                success: function (callback) {
+                    console.log(callback);
+                    // Watch out for Cross Site Scripting security issues when setting dynamic content!
+                    $(this).html("They are on");
+                },
+                error: function () {
+                    $(this).html("error!");
+                }
             });
+        });
 
-            $('#allLightsOff').submit(function (e) {
-                e.preventDefault();
+        $('#allLightsOff').submit(function (e) {
+            e.preventDefault();
 
-                var data = {};
+            var data = {};
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/allLightsOff',
-                    dataType: 'String',
-                    contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify(data),
-                    success: function (callback) {
-                        console.log(callback);
-                        // Watch out for Cross Site Scripting security issues when setting dynamic content!
-                        $(this).html("They are off");
-                    },
-                    error: function () {
-                        $(this).html("error!");
-                    }
-                });
+            $.ajax({
+                type: 'POST',
+                url: '/api/allLightsOff',
+                dataType: 'String',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data),
+                success: function (callback) {
+                    console.log(callback);
+                    // Watch out for Cross Site Scripting security issues when setting dynamic content!
+                    $(this).html("They are off");
+                },
+                error: function () {
+                    $(this).html("error!");
+                }
             });
+        });
 
-            $('#movingLEDrun').submit(function (e) {
-                e.preventDefault();
+        $('#movingLEDrun').submit(function (e) {
+            e.preventDefault();
 
-                var data = {};
+            var data = {};
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/movingLEDrun',
-                    dataType: 'String',
-                    contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify(data),
-                    success: function (callback) {
-                        console.log(callback);
-                        // Watch out for Cross Site Scripting security issues when setting dynamic content!
-                        $(this).html("They are off");
-                    },
-                    error: function () {
-                        $(this).html("error!");
-                    }
-                });
+            $.ajax({
+                type: 'POST',
+                url: '/api/movingLEDrun',
+                dataType: 'String',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data),
+                success: function (callback) {
+                    console.log(callback);
+                    // Watch out for Cross Site Scripting security issues when setting dynamic content!
+                    $(this).html("They are off");
+                },
+                error: function () {
+                    $(this).html("error!");
+                }
             });
+        });
 
-            $('#shelfRandomColours').submit(function (e) {
-                e.preventDefault();
+        $('#shelfRandomColours').submit(function (e) {
+            e.preventDefault();
 
-                var data = {};
+            var data = {};
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/shelfRandomColours',
-                    dataType: 'String',
-                    contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify(data),
-                    success: function (callback) {
-                        console.log(callback);
-                        // Watch out for Cross Site Scripting security issues when setting dynamic content!
-                        $(this).html("They are off");
-                    },
-                    error: function () {
-                        $(this).html("error!");
-                    }
-                });
+            $.ajax({
+                type: 'POST',
+                url: '/api/shelfRandomColours',
+                dataType: 'String',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data),
+                success: function (callback) {
+                    console.log(callback);
+                    // Watch out for Cross Site Scripting security issues when setting dynamic content!
+                    $(this).html("They are off");
+                },
+                error: function () {
+                    $(this).html("error!");
+                }
             });
+        });
 
-            $('#rainbow').submit(function (e) {
-                e.preventDefault();
+        $('#rainbow').submit(function (e) {
+            e.preventDefault();
 
-                var data = {};
+            var data = {};
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/rainbow',
-                    dataType: 'String',
-                    contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify(data),
-                    success: function (callback) {
-                        console.log(callback);
-                        // Watch out for Cross Site Scripting security issues when setting dynamic content!
-                        $(this).html("They are off");
-                    },
-                    error: function () {
-                        $(this).html("error!");
-                    }
-                });
+            $.ajax({
+                type: 'POST',
+                url: '/api/rainbow',
+                dataType: 'String',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data),
+                success: function (callback) {
+                    console.log(callback);
+                    // Watch out for Cross Site Scripting security issues when setting dynamic content!
+                    $(this).html("They are off");
+                },
+                error: function () {
+                    $(this).html("error!");
+                }
             });
-        </script>
-    </body>
+        });
+    </script>
+</body>
+
 </html>

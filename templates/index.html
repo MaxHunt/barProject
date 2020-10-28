@@ -117,7 +117,7 @@
             $('.shelf[number=' + shelf + '] .strip').css('background', hexColor);
         }
 
-        function setPreset(preset) {
+        async function setPreset(preset) {
             // Set strips
             setStripColor(1, `rgb(${preset.shelf1.r}, ${preset.shelf1.g}, ${preset.shelf1.b}`);
             setStripColor(2, `rgb(${preset.shelf2.r}, ${preset.shelf2.g}, ${preset.shelf2.b}`);
@@ -134,8 +134,45 @@
 
             setStripColor(13, `rgb(${preset.blackboard.r}, ${preset.blackboard.g}, ${preset.blackboard.b}`);
 
+            // Set lights
+            await setShelfLights(1, preset.shelf1.r, preset.shelf1.g, preset.shelf1.b);
+            await setShelfLights(2, preset.shelf2.r, preset.shelf2.g, preset.shelf2.b);
+            await setShelfLights(3, preset.shelf3.r, preset.shelf3.g, preset.shelf3.b);
+            await setShelfLights(4, preset.shelf4.r, preset.shelf4.g, preset.shelf4.b);
+            await setShelfLights(5, preset.shelf5.r, preset.shelf5.g, preset.shelf5.b);
+            await setShelfLights(6, preset.shelf6.r, preset.shelf6.g, preset.shelf6.b);
+            await setShelfLights(7, preset.shelf7.r, preset.shelf7.g, preset.shelf7.b);
+            await setShelfLights(8, preset.shelf8.r, preset.shelf8.g, preset.shelf8.b);
+
+            await setShelfLights(10, preset.floorLeft.r, preset.floorLeft.g, preset.floorLeft.b);
+            await setShelfLights(11, preset.floorMiddle.r, preset.floorMiddle.g, preset.floorMiddle.b);
+            await setShelfLights(12, preset.floorRight.r, preset.floorRight.g, preset.floorRight.b);
+
+            await setShelfLights(13, preset.blackboard.r, preset.blackboard.g, preset.blackboard.b);
             // Set Color Pickers: TODO
             // Set Lights: TODO
+        }
+
+        async function setShelfLights(shelf, r, g, b) {
+            const data = {
+                colour: { r, g, b },
+                shelf: shelf
+            };
+            return $.ajax({
+                type: 'POST',
+                url: '/api/shelfLights',
+                dataType: 'String',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(data),
+                success: function (callback) {
+                    console.log(callback);
+                    // Watch out for Cross Site Scripting security issues when setting dynamic content!
+                    $(this).html("They are on");
+                },
+                error: function () {
+                    $(this).html("error!");
+                }
+            }).promise();
         }
 
         //Shelves

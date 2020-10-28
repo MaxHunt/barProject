@@ -156,7 +156,7 @@
         function setShelfLights(shelf, r, g, b) {
             const data = {
                 colour: { r, g, b },
-                shelf: shelf
+                shelf: shelf.toString()
             };
             $.ajax({
                 type: 'POST',

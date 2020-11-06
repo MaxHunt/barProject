@@ -1,6 +1,9 @@
 from flask import Flask, render_template
 
+from presets import PresetsAPI
+
 app = Flask(__name__)
+app.add_url_rule('/presets/', view_func=PresetsAPI.as_view('presets'))
 
 #Flask and Ajax returns
 @app.route('/')

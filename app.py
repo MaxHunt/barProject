@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+
 import RPi.GPIO as GPIO
 import os
 import subprocess
@@ -12,6 +13,8 @@ import logging
 import numpy
 import requests
 import json
+
+from presets import PresetsAPI
 
 #Basic Colours
 RED = (255, 0, 0)
@@ -62,7 +65,7 @@ pixels = neopixel.NeoPixel(
 )
 #define app
 app = Flask(__name__)
-
+app.add_url_rule('/presets/', view_func=PresetsAPI.as_view('presets'))
 
 #Colour methods
 def soildColourAll(r,g,b):

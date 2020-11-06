@@ -3,8 +3,18 @@ $(document).ready(function () {
 });
 
 function buildPresetDropdown() {
-  presets.forEach((preset) => {
-    $('#preset-dropdown').append(`<option value="${preset.name.toLowerCase()}">${preset.name}</option>`);
+  $.ajax({
+    type: 'GET',
+    url: '/presets/',
+    success: function (data) {
+      const presets = JSON.parse(data);
+      presets.forEach((preset) => {
+        $('#preset-dropdown').append(`<option value="${preset.name.toLowerCase()}">${preset.name}</option>`);
+      });
+    },
+    error: function () {
+      console.error('Failed to retrieve presets');
+    }
   });
 }
 

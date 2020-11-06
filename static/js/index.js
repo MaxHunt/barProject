@@ -3,7 +3,6 @@ $(document).ready(function () {
 });
 
 function buildPresetDropdown() {
-  let presetOptions = '';
   presets.forEach((preset) => {
     $('#preset-dropdown').append(`<option value="${preset.name.toLowerCase()}">${preset.name}</option>`);
   });
@@ -87,13 +86,14 @@ var colorPicker5 = new iro.ColorPicker('#picker5');
 var colorPicker6 = new iro.ColorPicker('#picker6');
 var colorPicker7 = new iro.ColorPicker('#picker7');
 var colorPicker8 = new iro.ColorPicker('#picker8');
+
 // //Floor
 var colorPicker10 = new iro.ColorPicker('#picker10');
 var colorPicker11 = new iro.ColorPicker('#picker11');
 var colorPicker12 = new iro.ColorPicker('#picker12');
+
 //Blackboard
 var colorPicker13 = new iro.ColorPicker('#picker13');
-//Bar
 
 let selectedColor = '#000000';
 
@@ -144,8 +144,6 @@ $('.picker').on('pointerup', function (e) {
   };
 
   setStripColor(shelf, selectedColor);
-
-
 
   $.ajax({
     type: 'POST',
@@ -235,9 +233,6 @@ $("#fab").click(function (e) {
       console.log($`Error upon revealing secrect`);
     }
   });
-
-
-
 });
 
 $(".shelf").click(function (event) {

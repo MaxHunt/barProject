@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+import RPi.GPIO as GPIO
 import os
 import subprocess
 import time
@@ -39,16 +40,25 @@ blackBoard=(299,449)
 #Board pin
 pixel_pin = board.D18
 
+#Secret Shelf Control Pins
+##GPIO.setmode(GPIO.BOARD)
+##BCM Mode is already set up from nepixel libaray
+#Rasie
+print (GPIO.getmode())
+GPIO.setup(23, GPIO.OUT)
+#Lower
+GPIO.setup(24, GPIO.OUT)
+
 # The number of NeoPixels
 num_pixels = 450
- 
+
 # The order of the pixel colors - RGB or GRB. Some NeoPixels have red and green reversed!
 # For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
 ORDER = neopixel.GRB
  
 #LED Object
 pixels = neopixel.NeoPixel(
-    pixel_pin, num_pixels, brightness=0.2, auto_write=False, pixel_order=ORDER
+    pixel_pin, num_pixels, brightness=0.3, auto_write=False, pixel_order=ORDER
 )
 #define app
 app = Flask(__name__)
@@ -251,6 +261,68 @@ def rainbow():
         rainbow_cycle(0.001)
     print ("Lights Stopped")    
     return ("Success"), 204
+
+@app.route('/api/raise', methods=['POST'])
+def raiseShelf():
+    GPIO.output(24, GPIO.HIGH)
+    print("Start Raise")
+    GPIO.output(23, GPIO.LOW)
+    print("Wait for Raise")
+    time.sleep(28)
+    GPIO.output(23, GPIO.HIGH)
+    print("Rasie Finshed")
+    return ("Success"), 200 
+
+@app.route('/api/raisefab', methods=['POST'])
+def raisefab():
+    wipeLEDAll()
+#     shelf1 = (0,23)
+# shelf2 = (24,47)
+# shelf3 = (48,71)
+# shelf4 = (72,95)
+# shelf5 = (96,119)
+# shelf6 = (120,143)
+# shelf7 = (144,167)
+# shelf8 = (168,191)
+# #Floor Boards
+# floorLeft = (192,215)
+# floorMiddle = (216,273)
+# floorRight = (274,298)
+# #BlackBoard 20 height 22 long
+# blackBoard=(299,449)
+    #5
+    for i in range(48,(119+1)):
+        colourLED(192,192,192,i,False)
+    for i in range(144,(298+1)):
+        colourLED(192,192,192,i,False)
+    for i in range(319,(341+1)):
+        colourLED(192,192,192,i,False)
+    for i in range(362,(384+1)):
+        colourLED(192,192,192,i,False)
+    pixels.show()
+
+    
+    # for i in range(144,(298+1)):
+    #     colourLED(192,192,192,i,False)
+    # GPIO.output(24, GPIO.HIGH)
+    # print("Start Raise")
+    # GPIO.output(23, GPIO.LOW)
+    # print("Wait for Raise")
+    # time.sleep(28)
+    # GPIO.output(23, GPIO.HIGH)
+    # print("Rasie Finshed")
+    return ("Success"), 200 
+
+@app.route('/api/lower', methods=['POST'])
+def lowerShelf():
+    GPIO.output(23, GPIO.HIGH)
+    print("Start Lower")
+    GPIO.output(24, GPIO.LOW)
+    print("Wait for Lower")
+    time.sleep(32)
+    GPIO.output(24, GPIO.HIGH)
+    print("Lower Finshed")
+    return ("Success"), 200 
 
 ##Run
 if __name__ == '__main__':

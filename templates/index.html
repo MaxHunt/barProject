@@ -31,9 +31,21 @@
             <form id="rainbow">
                 <input type="submit" value="Rainbow Cycle" class="pure-button" />
             </form>
+            <form id="raise">
+                <input type="submit" value="Raise" class="pure-button" />
+            </form>
+            <form id="lower">
+                <input type="submit" value="Lower" class="pure-button" />
+            </form>
             <form id="decanter">
                 <input id="decanter" type="submit" value="Decanter" class="pure-button" />
             </form>
+            <form id="fab">
+                <input id="fab" type="submit" value="F.A.B" class="pure-button" />
+            </form>
+            <audio controls>
+                <source src="../Thunderbirds.mp3" type="audio/mpeg">
+            </audio>
         </div>
         <div class="shelf" id="preset-dropdown-container">
             <div class="strip"></div>
@@ -105,7 +117,11 @@
             <h1>Black Board </h1>
             <div class="picker picker-hidden" id="picker13" name="13"></div>
         </div>
-        <audio id="starwars" src="https://www.soundboard.com/mediafiles/nz/NzgyNjE2Mzc4MjczNw_uPjBRei6KIc.mp3" />
+        <audio id="thunderbirds" scr="Thunderbirds.mp3" type="audio/mpeg"></audio> 
+        
+        <audio id="starwars" src="https://www.soundboard.com/mediafiles/nz/NzgyNjE2Mzc4MjczNw_uPjBRei6KIc.mp3"></audio>
+
+        
 
     </center>
 
@@ -285,10 +301,71 @@
             } : null;
         }
 
+        $("#raise").click(function (e) {
+            e.preventDefault();
+            const raise = document.getElementById('raise');
+            
+            $.ajax({
+                type: 'POST',
+                url: '/api/raise',
+                dataType: 'text',
+                contentType: 'application/json; charset=utf-8',
+                //data: JSON.stringify(data),
+                success: function (response) {
+                    console.log(`${response} - Secrect Revealed!`);
+                },
+                error: function () {
+                    console.log($`Error upon revealing secrect`);
+                }
+            });          
+        });
+
+        $("#lower").click(function (e) {
+            e.preventDefault();
+            const lower = document.getElementById('lower');
+            
+            $.ajax({
+                type: 'POST',
+                url: '/api/lower',
+                dataType: 'text',
+                contentType: 'application/json; charset=utf-8',
+                //data: JSON.stringify(data),
+                success: function (response) {
+                    console.log(`${response} - Secrect Put Away!`);
+                },
+                error: function () {
+                    console.log($`Error upon putting away the secrect`);
+                }
+            });
+        });
+
         $("#decanter").click(function (e) {
             e.preventDefault();
             const starWars = document.getElementById('starwars');
             starWars.paused ? starWars.play() : starWars.pause();
+        });
+
+        $("#fab").click(function (e) {
+            e.preventDefault();
+            const fab = document.getElementById('thunderbirds');
+            console.log(fab)
+            fab.play()
+            $.ajax({
+                type: 'POST',
+                url: '/api/raisefab',
+                dataType: 'text',
+                contentType: 'application/json; charset=utf-8',
+                //data: JSON.stringify(data),
+                success: function (response) {
+                    console.log(`${response} - Secrect Revealed!`);
+                },
+                error: function () {
+                    console.log($`Error upon revealing secrect`);
+                }
+            });  
+
+
+
         });
 
         $(".shelf").click(function (event) {
@@ -313,34 +390,6 @@
                 $(picker).toggleClass('picker-hidden');
             }
         });
-
-        // $('#shelfLights1').add('#shelfLights2').add('#shelfLights3').add('#shelfLights4').add('#shelfLights5').add('#shelfLights6').add('#shelfLights7').add('#shelfLights8').add('#shelfLights9').add('#FloorRightLights').add('#FloorLeftLights').add('#FloorMiddleLights').submit(function (e) {
-        //     e.preventDefault();
-        //     var form = $(this);
-        //     var data = {};
-        //     $.each(form, function (index, value) {
-        //         colour = hexToRgb((this.shelfColor).value);
-        //         shelf = (this.shelfColor.name)
-        //         var data = { "colour": colour, "shelf": shelf };
-        //     });
-        //     var data = { "colour": colour, "shelf": shelf };
-        //     console.log(data)
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: '/api/shelfLights',
-        //         dataType: 'String',
-        //         contentType: 'application/json; charset=utf-8',
-        //         data: JSON.stringify(data),
-        //         success: function (callback) {
-        //             console.log(callback);
-        //             // Watch out for Cross Site Scripting security issues when setting dynamic content!
-        //             $(this).html("They are on");
-        //         },
-        //         error: function () {
-        //             $(this).html("error!");
-        //         }
-        //     });
-        // });
 
         $('#allLightsOn').submit(function (e) {
             e.preventDefault();

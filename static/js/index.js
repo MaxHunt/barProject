@@ -2,12 +2,14 @@ $(document).ready(function () {
   buildPresetDropdown();
 });
 
+let presets = [];
+
 function buildPresetDropdown() {
   $.ajax({
     type: 'GET',
     url: '/presets/',
     success: function (data) {
-      const presets = JSON.parse(data);
+      presets = JSON.parse(data);
       presets.forEach((preset) => {
         $('#preset-dropdown').append(`<option value="${preset.name.toLowerCase()}">${preset.name}</option>`);
       });

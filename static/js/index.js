@@ -5,15 +5,15 @@ $(document).ready(function () {
 function buildPresetDropdown() {
   let presetOptions = '';
   presets.forEach((preset) => {
-      $('#preset-dropdown').append(`<option value="${preset.name.toLowerCase()}">${preset.name}</option>`);
+    $('#preset-dropdown').append(`<option value="${preset.name.toLowerCase()}">${preset.name}</option>`);
   });
 }
 
 $('#preset-dropdown').on('change', function () {
   for (let i = 0; i < presets.length; i++) {
-      if (presets[i].name.toLowerCase() === this.value) {
-          setPreset(presets[i]);
-      }
+    if (presets[i].name.toLowerCase() === this.value) {
+      setPreset(presets[i]);
+    }
   }
 });
 
@@ -58,23 +58,23 @@ function setPreset(preset) {
 
 function setShelfLights(shelf, r, g, b) {
   const data = {
-      colour: { r, g, b },
-      shelf: shelf.toString()
+    colour: { r, g, b },
+    shelf: shelf.toString()
   };
   $.ajax({
-      type: 'POST',
-      url: '/api/shelfLights',
-      dataType: 'String',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify(data),
-      success: function (callback) {
-          console.log(callback);
-          // Watch out for Cross Site Scripting security issues when setting dynamic content!
-          $(this).html("They are on");
-      },
-      error: function () {
-          $(this).html("error!");
-      }
+    type: 'POST',
+    url: '/api/shelfLights',
+    dataType: 'String',
+    contentType: 'application/json; charset=utf-8',
+    data: JSON.stringify(data),
+    success: function (callback) {
+      console.log(callback);
+      // Watch out for Cross Site Scripting security issues when setting dynamic content!
+      $(this).html("They are on");
+    },
+    error: function () {
+      $(this).html("error!");
+    }
   });
 }
 
@@ -139,8 +139,8 @@ $('.picker').on('pointerup', function (e) {
   const shelf = e.currentTarget.attributes.getNamedItem('name').value;
 
   const data = {
-      colour: hexToRgb(selectedColor),
-      shelf: shelf
+    colour: hexToRgb(selectedColor),
+    shelf: shelf
   };
 
   setStripColor(shelf, selectedColor);
@@ -148,64 +148,66 @@ $('.picker').on('pointerup', function (e) {
 
 
   $.ajax({
-      type: 'POST',
-      url: '/api/shelfLights',
-      dataType: 'text',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify(data),
-      success: function (response) {
-          console.log(`${response} - Shelf ${shelf} set to a colour`);
-      },
-      error: function () {
-          console.log($`Couldn't set Shelf ${shelf} colour`);
-      }
+    type: 'POST',
+    url: '/api/shelfLights',
+    dataType: 'text',
+    contentType: 'application/json; charset=utf-8',
+    data: JSON.stringify(data),
+    success: function (response) {
+      console.log(`${response} - Shelf ${shelf} set to a colour`);
+    },
+    error: function () {
+      console.log($`Couldn't set Shelf ${shelf} colour`);
+    }
   });
 });
 
 function hexToRgb(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
   } : null;
 }
 
 $("#raise").click(function (e) {
   e.preventDefault();
-  const raise = document.getElementById('raise');
-  
+
+  $('#raise-button').prop('disabled', true);
+
   $.ajax({
-      type: 'POST',
-      url: '/api/raise',
-      dataType: 'text',
-      contentType: 'application/json; charset=utf-8',
-      //data: JSON.stringify(data),
-      success: function (response) {
-          console.log(`${response} - Secrect Revealed!`);
-      },
-      error: function () {
-          console.log($`Error upon revealing secrect`);
-      }
-  });          
+    type: 'POST',
+    url: '/api/raise',
+    dataType: 'text',
+    contentType: 'application/json; charset=utf-8',
+    success: function (response) {
+      console.log(`${response} - Secret Revealed!`);
+      $('#lower-button').prop('disabled', false);
+    },
+    error: function () {
+      console.log('Error revealing secret!');
+    }
+  });
 });
 
 $("#lower").click(function (e) {
   e.preventDefault();
-  const lower = document.getElementById('lower');
-  
+
+  $('#lower-button').prop('disabled', true);
+
   $.ajax({
-      type: 'POST',
-      url: '/api/lower',
-      dataType: 'text',
-      contentType: 'application/json; charset=utf-8',
-      //data: JSON.stringify(data),
-      success: function (response) {
-          console.log(`${response} - Secrect Put Away!`);
-      },
-      error: function () {
-          console.log($`Error upon putting away the secrect`);
-      }
+    type: 'POST',
+    url: '/api/lower',
+    dataType: 'text',
+    contentType: 'application/json; charset=utf-8',
+    success: function (response) {
+      console.log(`${response} - Secret Put Away!`);
+      $('#raise-button').prop('disabled', false);
+    },
+    error: function () {
+      console.log('Error putting away the secret!');
+    }
   });
 });
 
@@ -221,18 +223,18 @@ $("#fab").click(function (e) {
   console.log(fab)
   fab.play()
   $.ajax({
-      type: 'POST',
-      url: '/api/raisefab',
-      dataType: 'text',
-      contentType: 'application/json; charset=utf-8',
-      //data: JSON.stringify(data),
-      success: function (response) {
-          console.log(`${response} - Secrect Revealed!`);
-      },
-      error: function () {
-          console.log($`Error upon revealing secrect`);
-      }
-  });  
+    type: 'POST',
+    url: '/api/raisefab',
+    dataType: 'text',
+    contentType: 'application/json; charset=utf-8',
+    //data: JSON.stringify(data),
+    success: function (response) {
+      console.log(`${response} - Secrect Revealed!`);
+    },
+    error: function () {
+      console.log($`Error upon revealing secrect`);
+    }
+  });
 
 
 
@@ -244,20 +246,20 @@ $(".shelf").click(function (event) {
   const iroColorPicker = $(picker).find('.IroColorPicker')[0];
 
   if (!iroColorPicker) {
-      return;
+    return;
   }
 
   const iroPickerBounds = iroColorPicker.getBoundingClientRect();
 
   if (
-      event.pageX >= iroPickerBounds.x &&
-      event.pageY >= iroPickerBounds.y &&
-      event.pageX <= iroPickerBounds.x + iroPickerBounds.width &&
-      event.pageY <= iroPickerBounds.y + iroPickerBounds.height
+    event.pageX >= iroPickerBounds.x &&
+    event.pageY >= iroPickerBounds.y &&
+    event.pageX <= iroPickerBounds.x + iroPickerBounds.width &&
+    event.pageY <= iroPickerBounds.y + iroPickerBounds.height
   ) {
-      console.log('Nah mate');
+    console.log('Nah mate');
   } else {
-      $(picker).toggleClass('picker-hidden');
+    $(picker).toggleClass('picker-hidden');
   }
 });
 
@@ -267,19 +269,19 @@ $('#allLightsOn').submit(function (e) {
   var data = {};
 
   $.ajax({
-      type: 'POST',
-      url: '/api/allLightsOn',
-      dataType: 'String',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify(data),
-      success: function (callback) {
-          console.log(callback);
-          // Watch out for Cross Site Scripting security issues when setting dynamic content!
-          $(this).html("They are on");
-      },
-      error: function () {
-          $(this).html("error!");
-      }
+    type: 'POST',
+    url: '/api/allLightsOn',
+    dataType: 'String',
+    contentType: 'application/json; charset=utf-8',
+    data: JSON.stringify(data),
+    success: function (callback) {
+      console.log(callback);
+      // Watch out for Cross Site Scripting security issues when setting dynamic content!
+      $(this).html("They are on");
+    },
+    error: function () {
+      $(this).html("error!");
+    }
   });
 });
 
@@ -289,19 +291,19 @@ $('#allLightsOff').submit(function (e) {
   var data = {};
 
   $.ajax({
-      type: 'POST',
-      url: '/api/allLightsOff',
-      dataType: 'String',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify(data),
-      success: function (callback) {
-          console.log(callback);
-          // Watch out for Cross Site Scripting security issues when setting dynamic content!
-          $(this).html("They are off");
-      },
-      error: function () {
-          $(this).html("error!");
-      }
+    type: 'POST',
+    url: '/api/allLightsOff',
+    dataType: 'String',
+    contentType: 'application/json; charset=utf-8',
+    data: JSON.stringify(data),
+    success: function (callback) {
+      console.log(callback);
+      // Watch out for Cross Site Scripting security issues when setting dynamic content!
+      $(this).html("They are off");
+    },
+    error: function () {
+      $(this).html("error!");
+    }
   });
 });
 
@@ -311,19 +313,19 @@ $('#movingLEDrun').submit(function (e) {
   var data = {};
 
   $.ajax({
-      type: 'POST',
-      url: '/api/movingLEDrun',
-      dataType: 'String',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify(data),
-      success: function (callback) {
-          console.log(callback);
-          // Watch out for Cross Site Scripting security issues when setting dynamic content!
-          $(this).html("They are off");
-      },
-      error: function () {
-          $(this).html("error!");
-      }
+    type: 'POST',
+    url: '/api/movingLEDrun',
+    dataType: 'String',
+    contentType: 'application/json; charset=utf-8',
+    data: JSON.stringify(data),
+    success: function (callback) {
+      console.log(callback);
+      // Watch out for Cross Site Scripting security issues when setting dynamic content!
+      $(this).html("They are off");
+    },
+    error: function () {
+      $(this).html("error!");
+    }
   });
 });
 
@@ -333,19 +335,19 @@ $('#shelfRandomColours').submit(function (e) {
   var data = {};
 
   $.ajax({
-      type: 'POST',
-      url: '/api/shelfRandomColours',
-      dataType: 'String',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify(data),
-      success: function (callback) {
-          console.log(callback);
-          // Watch out for Cross Site Scripting security issues when setting dynamic content!
-          $(this).html("They are off");
-      },
-      error: function () {
-          $(this).html("error!");
-      }
+    type: 'POST',
+    url: '/api/shelfRandomColours',
+    dataType: 'String',
+    contentType: 'application/json; charset=utf-8',
+    data: JSON.stringify(data),
+    success: function (callback) {
+      console.log(callback);
+      // Watch out for Cross Site Scripting security issues when setting dynamic content!
+      $(this).html("They are off");
+    },
+    error: function () {
+      $(this).html("error!");
+    }
   });
 });
 
@@ -355,18 +357,18 @@ $('#rainbow').submit(function (e) {
   var data = {};
 
   $.ajax({
-      type: 'POST',
-      url: '/api/rainbow',
-      dataType: 'String',
-      contentType: 'application/json; charset=utf-8',
-      data: JSON.stringify(data),
-      success: function (callback) {
-          console.log(callback);
-          // Watch out for Cross Site Scripting security issues when setting dynamic content!
-          $(this).html("They are off");
-      },
-      error: function () {
-          $(this).html("error!");
-      }
+    type: 'POST',
+    url: '/api/rainbow',
+    dataType: 'String',
+    contentType: 'application/json; charset=utf-8',
+    data: JSON.stringify(data),
+    success: function (callback) {
+      console.log(callback);
+      // Watch out for Cross Site Scripting security issues when setting dynamic content!
+      $(this).html("They are off");
+    },
+    error: function () {
+      $(this).html("error!");
+    }
   });
 });

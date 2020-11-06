@@ -35,9 +35,9 @@ shelf6 = (120,143)
 shelf7 = (144,167)
 shelf8 = (168,191)
 #Floor Boards
-floorLeft = (192,215)
+floorRight = (192,215)
 floorMiddle = (216,273)
-floorRight = (274,298)
+floorLeft = (274,298)
 #BlackBoard
 blackBoard=(299,449)
 #Board pin
@@ -121,6 +121,11 @@ def setColourShelf(shelfnumber,r,g,b):
     for i in range(shelfnumber[0],(shelfnumber[1]+1)):
         colourLED(r,g,b,i,False)
     pixels.show()
+
+def setColourShelfWithoutShow(shelfnumber,r,g,b):
+    #pixels.fill((r,g,b),shelfnumber[0],24)
+    for i in range(shelfnumber[0],(shelfnumber[1]+1)):
+        colourLED(r,g,b,i,False)
 
 ##############################start up funcations####################################################################
 def redToGreenTransferThread(r,g,b):
@@ -288,32 +293,84 @@ def raisefab():
 # shelf7 = (144,167)
 # shelf8 = (168,191)
 # #Floor Boards
-# floorLeft = (192,215)
+# floorRight = (192,215)
 # floorMiddle = (216,273)
-# floorRight = (274,298)
+# floorLeft = (274,298)
 # #BlackBoard 20 height 22 long
 # blackBoard=(299,449)
-    #5
+   #5
     for i in range(48,(119+1)):
         colourLED(192,192,192,i,False)
     for i in range(144,(298+1)):
         colourLED(192,192,192,i,False)
     for i in range(319,(341+1)):
         colourLED(192,192,192,i,False)
-    for i in range(362,(384+1)):
+    for i in range(363,(387+1)):
         colourLED(192,192,192,i,False)
     pixels.show()
-
+    time.sleep(2)
+    #4
+    wipeLEDAll()
+    for i in range(48,(191+1)):
+        colourLED(247,255,0,i,False)
+    for i in range(319,(341+1)):
+        colourLED(247,255,0,i,False)
+    pixels.show()
+    #3
+    time.sleep(2)
+    wipeLEDAll()
+    setColourShelfWithoutShow(floorLeft,255,0,0)
+    setColourShelfWithoutShow(floorMiddle,255,0,0)
+    setColourShelfWithoutShow(floorRight,255,0,0)
+    setColourShelfWithoutShow(shelf8,255,0,0)
+    setColourShelfWithoutShow(shelf7,255,0,0)
+    setColourShelfWithoutShow(shelf6,255,0,0)
+    setColourShelfWithoutShow(shelf5,255,0,0)
+    setColourShelfWithoutShow(shelf4,255,0,0)
+    setColourShelfWithoutShow(shelf1,255,0,0)
+    for i in range(319,(341+1)):
+        colourLED(255,0,0,i,False)
+    for i in range(363,(387+1)):
+        colourLED(255,0,0,i,False)
+    pixels.show()
+    time.sleep(2)
+    #2
+    wipeLEDAll()
+    setColourShelfWithoutShow(floorLeft,0,255,0)
+    setColourShelfWithoutShow(floorMiddle,0,255,0)
+    setColourShelfWithoutShow(floorRight,0,255,0)
+    setColourShelfWithoutShow(shelf7,0,255,0)
+    setColourShelfWithoutShow(shelf6,0,255,0)
+    setColourShelfWithoutShow(shelf5,0,255,0)
+    setColourShelfWithoutShow(shelf4,0,255,0)
+    setColourShelfWithoutShow(shelf2,0,255,0)
+    setColourShelfWithoutShow(shelf1,0,255,0)
+    for i in range(319,(341+1)):
+        colourLED(0,255,0,i,False)
+    for i in range(363,(387+1)):
+        colourLED(0,255,0,i,False)
+    pixels.show()
+    time.sleep(2)
+    #1
+    wipeLEDAll()
+    setColourShelfWithoutShow(floorRight,0,0,255)
+    setColourShelfWithoutShow(shelf8,0,0,255)
+    setColourShelfWithoutShow(shelf7,0,0,255)
+    setColourShelfWithoutShow(shelf6,0,0,255)
+    setColourShelfWithoutShow(shelf5,0,0,255)
+    pixels.show()
+    time.sleep(1)
+    t_end = time.time() + 2
+    while (time.time() < t_end):
+        for i in range(192,(215+1)):
+            colour = random.randint(0,2)
+            if (colour==0):
+                colourLED(255,0,0,i,True)
+            elif (colour==1):
+                colourLED(255,255,0,i,True)
+            elif (colour==2):
+                colourLED(255,179,0,i,True)        
     
-    # for i in range(144,(298+1)):
-    #     colourLED(192,192,192,i,False)
-    # GPIO.output(24, GPIO.HIGH)
-    # print("Start Raise")
-    # GPIO.output(23, GPIO.LOW)
-    # print("Wait for Raise")
-    # time.sleep(28)
-    # GPIO.output(23, GPIO.HIGH)
-    # print("Rasie Finshed")
     return ("Success"), 200 
 
 @app.route('/api/lower', methods=['POST'])

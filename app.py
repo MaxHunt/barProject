@@ -13,6 +13,7 @@ import logging
 import numpy
 import requests
 import json
+import multiprocessing
 
 from presets import PresetsAPI
 
@@ -25,7 +26,7 @@ BLUE = (0, 0, 255)
 PURPLE = (180, 0, 255)
 #Shelf ID's 
 #(24 LED's per Shelf) 
-#Shelf 
+#Shelf
 shelf1 = (0,23)
 shelf2 = (24,47)
 shelf3 = (48,71)
@@ -34,12 +35,17 @@ shelf5 = (96,119)
 shelf6 = (120,143)
 shelf7 = (144,167)
 shelf8 = (168,191)
+allshelfs=(0,191)
+leftShelfs=(0,95)
+rightShels=(96,191)
 #Floor Boards
 floorRight = (192,215)
 floorMiddle = (216,273)
 floorLeft = (274,298)
 #BlackBoard
 blackBoard=(299,449)
+#bar
+bar=(0,449)
 #Board pin
 pixel_pin = board.D18
 
@@ -126,6 +132,46 @@ def setColourShelfWithoutShow(shelfnumber,r,g,b):
     #pixels.fill((r,g,b),shelfnumber[0],24)
     for i in range(shelfnumber[0],(shelfnumber[1]+1)):
         colourLED(r,g,b,i,False)
+
+def lightUpAll(RGB,duration,interval,shelfnumber):
+    sleepinterval=duration/interval
+    roiRed=0   
+    roiGreen=0
+    roiBlue=0
+    if (RGB[0]!=0):
+        roiRed=RGB[0]/sleepinterval
+    if (RGB[1]!=0): 
+        roiGreen=RGB[1]/sleepinterval
+    if (RGB[2]!=0):
+        roiBlue=RGB[2]/sleepinterval
+    for i in range(0,round(sleepinterval)):        
+        for j in range(shelfnumber[0],(shelfnumber[1]+1)):
+            pixels[j] = (round(roiRed*i),round(roiGreen*i),round(roiBlue*i))
+        pixels.show()
+
+def lightDownAll(RGB,duration,interval,shelfnumber):
+    sleepinterval=duration/interval
+    roiRed=0   
+    roiGreen=0
+    roiBlue=0
+    if (RGB[0]!=0):
+        roiRed=RGB[0]/sleepinterval
+    if (RGB[1]!=0): 
+        roiGreen=RGB[1]/sleepinterval
+    if (RGB[2]!=0):
+        roiBlue=RGB[2]/sleepinterval
+    for i in range(0,round(sleepinterval)):        
+        for j in range(shelfnumber[0],(shelfnumber[1]+1)):
+            pixels[j] = (RGB[0]-(round(roiRed*i)),round(RGB[1]-(roiGreen*i)),round(RGB[2]-(roiBlue*i)))
+        pixels.show()
+
+def thunderbirds101thread():
+    while True:
+        setColourShelf(floorLeft,255,255,255)
+        setColourShelf(floorLeft,0,0,0)
+        setColourShelf(floorRight,255,255,255)
+        setColourShelf(floorRight,0,0,0)
+
 
 ##############################start up funcations####################################################################
 def redToGreenTransferThread(r,g,b):
@@ -237,8 +283,9 @@ def allLightsOff():
 @app.route('/api/movingLEDrun', methods=['POST'])
 def movingLEDrun():    
     json = request.get_json()
-    print ("Lights Started")  
-    movingLEDAll(180,0,255,0.1)
+    print ("Lights Started") 
+    lightDownAll([0,255,0],1,0.01,bar) 
+    #movingLEDAll(180,0,255,0.1)
     print ("Lights Stopped")    
     return ("Success"), 204
 
@@ -280,6 +327,17 @@ def raiseShelf():
     GPIO.output(23, GPIO.HIGH)
     print("Rasie Finshed")
     return ("Success"), 200 
+
+@app.route('/api/lower', methods=['POST'])
+def lowerShelf():
+    GPIO.output(23, GPIO.HIGH)
+    print("Start Lower")
+    GPIO.output(24, GPIO.LOW)
+    print("Wait for Lower")
+    time.sleep(32)
+    GPIO.output(24, GPIO.HIGH)
+    print("Lower Finshed")
+    return ("Success"), 200
 
 @app.route('/api/raisefab', methods=['POST'])
 def raisefab():
@@ -359,34 +417,257 @@ def raisefab():
     setColourShelfWithoutShow(shelf6,0,0,255)
     setColourShelfWithoutShow(shelf5,0,0,255)
     pixels.show()
-    time.sleep(1)
-    t_end = time.time() + 2
-    while (time.time() < t_end):
+    time.sleep(0.2)
+    #Engines fire
+    t_end = time.time() + 4.5
+    while (time.time() < t_end):    
+        pixels.show()
         for i in range(192,(215+1)):
-            colour = random.randint(0,2)
+            colour = random.randint(0,3)
             if (colour==0):
-                colourLED(255,0,0,i,True)
+                pixels[i] = (255,0,0)
             elif (colour==1):
-                colourLED(255,255,0,i,True)
+                pixels[i] = (255,255,0)
             elif (colour==2):
-                colourLED(255,179,0,i,True)        
-    
-    return ("Success"), 200 
-
-@app.route('/api/lower', methods=['POST'])
-def lowerShelf():
-    GPIO.output(23, GPIO.HIGH)
-    print("Start Lower")
-    GPIO.output(24, GPIO.LOW)
-    print("Wait for Lower")
-    time.sleep(32)
-    GPIO.output(24, GPIO.HIGH)
-    print("Lower Finshed")
-    return ("Success"), 200 
+                pixels[i] = (255,137,0)
+    #Move Thunderbird 1 Up
+    setColourShelfWithoutShow(shelf8,0,0,0)
+    setColourShelfWithoutShow(floorRight,0,0,0)
+    t_end = time.time() + 0.25
+    while (time.time() < t_end):
+        pixels.show()
+        for i in range(168,(191+1)):
+            colour = random.randint(0,3)
+            if (colour==0):
+                pixels[i] = (255,0,0)
+            elif (colour==1):
+                pixels[i] = (255,255,0)
+            elif (colour==2):
+                pixels[i] = (255,137,0)
+    setColourShelfWithoutShow(shelf7,0,0,0)
+    setColourShelfWithoutShow(shelf8,0,0,0)
+    t_end = time.time() + 0.25
+    while (time.time() < t_end):
+        pixels.show()
+        for i in range(144,(167+1)):
+            colour = random.randint(0,3)
+            if (colour==0):
+                pixels[i] = (255,0,0)
+            elif (colour==1):
+                pixels[i] = (255,255,0)
+            elif (colour==2):
+                pixels[i] = (255,137,0)
+    setColourShelfWithoutShow(shelf6,0,0,0)
+    setColourShelfWithoutShow(shelf7,0,0,0)
+    t_end = time.time() + 0.125
+    while (time.time() < t_end):
+        pixels.show()
+        for i in range(120,(143+1)):
+            colour = random.randint(0,3)
+            if (colour==0):
+                pixels[i] = (255,0,0)
+            elif (colour==1):
+                pixels[i] = (255,255,0)
+            elif (colour==2):
+                pixels[i] = (255,137,0)
+    setColourShelfWithoutShow(shelf5,0,0,0)
+    setColourShelfWithoutShow(shelf6,0,0,0)
+    t_end = time.time() + 0.0625
+    while (time.time() < t_end):
+        pixels.show()
+        for i in range(96,(119+1)):
+            colour = random.randint(0,3)
+            if (colour==0):
+                pixels[i] = (255,0,0)
+            elif (colour==1):
+                pixels[i] = (255,255,0)
+            elif (colour==2):
+                pixels[i] = (255,137,0)
+    lightUpAll([0,255,0],1,0.1,bar)
+    stop_thread101 = False
+    wipeLEDAll()
+    #Quick Start
+    #trumpt
+    lightDownAll([255,255,255],2,0.1,allshelfs)
+    lightDownAll([255,255,255],2,0.1,allshelfs)
+    lightDownAll([255,255,255],0.8,0.1,allshelfs)
+    #trumbone
+    wipeLEDAll()
+    setColourShelfWithoutShow(shelf5,255,0,239)
+    setColourShelfWithoutShow(shelf4,255,0,239)
+    setColourShelfWithoutShow(shelf6,255,0,239)
+    pixels.show()
+    wipeLEDAll()
+    setColourShelfWithoutShow(shelf3,255,0,239)
+    setColourShelfWithoutShow(shelf7,255,0,239)
+    pixels.show()
+    wipeLEDAll()
+    setColourShelfWithoutShow(shelf1,255,0,239)
+    setColourShelfWithoutShow(shelf2,255,0,239)
+    setColourShelfWithoutShow(shelf8,255,0,239)
+    pixels.show()
+    time.sleep(0.15)
+    wipeLEDAll()
+    #thread101 = multiprocessing.Process(target=thunderbirds101thread)
+    #thread101.start()
+    #main fast sequence
+    #loop1
+    setColourShelfWithoutShow(shelf2,0,247,255)
+    pixels.show()
+    time.sleep(0.1)
+    setColourShelfWithoutShow(shelf6,0,247,255)
+    pixels.show()
+    time.sleep(0.1)
+    setColourShelfWithoutShow(shelf3,0,247,255)
+    pixels.show()
+    time.sleep(0.1)
+    setColourShelfWithoutShow(shelf8,0,247,255)
+    pixels.show()
+    time.sleep(0.1)
+    setColourShelfWithoutShow(shelf1,0,247,255)
+    pixels.show()
+    time.sleep(0.1)
+    setColourShelfWithoutShow(shelf4,0,247,255)
+    pixels.show()
+    time.sleep(0.3)
+    setColourShelfWithoutShow(shelf7,0,247,255)
+    pixels.show()
+    time.sleep(0.3)
+    setColourShelfWithoutShow(shelf5,0,247,255)
+    pixels.show()
+    time.sleep(0.3)
+    setColourShelfWithoutShow(bar,0,247,255)
+    pixels.show()
+    time.sleep(0.1)
+    setColourShelfWithoutShow(bar,255,100,255)
+    pixels.show()
+    time.sleep(0.2)
+    #loop 2
+    wipeLEDAll()
+    setColourShelfWithoutShow(shelf5,255,0,239)
+    setColourShelfWithoutShow(shelf4,255,0,239)
+    setColourShelfWithoutShow(shelf6,255,0,239)
+    pixels.show()
+    wipeLEDAll()
+    setColourShelfWithoutShow(shelf3,255,0,239)
+    setColourShelfWithoutShow(shelf7,255,0,239)
+    pixels.show()
+    wipeLEDAll()
+    setColourShelfWithoutShow(shelf1,255,0,239)
+    setColourShelfWithoutShow(shelf2,255,0,239)
+    setColourShelfWithoutShow(shelf8,255,0,239)
+    pixels.show()
+    time.sleep(0.15)
+    wipeLEDAll()
+    setColourShelfWithoutShow(shelf2,50,255,93)
+    pixels.show()
+    time.sleep(0.1)
+    setColourShelfWithoutShow(shelf6,50,255,93)
+    pixels.show()
+    time.sleep(0.1)
+    setColourShelfWithoutShow(shelf3,50,255,93)
+    pixels.show()
+    time.sleep(0.1)
+    setColourShelfWithoutShow(shelf8,50,255,93)
+    pixels.show()
+    time.sleep(0.1)
+    setColourShelfWithoutShow(shelf1,50,255,93)
+    pixels.show()
+    time.sleep(0.1)
+    setColourShelfWithoutShow(shelf4,50,255,93)
+    pixels.show()
+    time.sleep(0.3)
+    setColourShelfWithoutShow(shelf7,50,255,93)
+    pixels.show()
+    time.sleep(0.3)
+    setColourShelfWithoutShow(shelf5,50,255,93)
+    pixels.show()
+    time.sleep(0.3)
+    setColourShelfWithoutShow(bar,50,255,93)
+    pixels.show()
+    time.sleep(0.1)
+    setColourShelfWithoutShow(bar,255,100,255)
+    pixels.show()
+    time.sleep(0.6)
+    wipeLEDAll()
+    #fastsequencemain
+    lightUpAll([0,255,0],0.5,0.1,bar)
+    wipeLEDAll()
+    lightUpAll([0,255,0],0.4,0.1,bar)
+    time.sleep(0.1)
+    wipeLEDAll()    
+    setColourShelf(floorMiddle,255,255,0)
+    setColourShelf(blackBoard,255,255,0)
+    pixels.show()
+    time.sleep(0.2)
+    lightUpAll([255,0,0],0.5,0.1,bar)
+    wipeLEDAll()
+    lightUpAll([255,0,0],0.4,0.1,bar)
+    time.sleep(0.2)
+    wipeLEDAll()
+    setColourShelf(floorMiddle,0,255,255)
+    setColourShelf(blackBoard,0,255,255)
+    pixels.show()
+    time.sleep(0.2)
+    lightUpAll([0,0,255],0.5,0.1,bar)
+    wipeLEDAll()
+    lightUpAll([0,0,255],0.4,0.1,bar)
+    time.sleep(0.2)
+    wipeLEDAll()
+    setColourShelf(floorMiddle,238,130,238)
+    setColourShelf(blackBoard,238,130,238)
+    pixels.show()
+    time.sleep(0.2)
+    lightUpAll([255,0,255],0.5,0.1,bar)
+    wipeLEDAll()
+    lightUpAll([255,0,255],0.4,0.1,bar)
+    time.sleep(0.2)
+    setColourShelf(floorMiddle,255,0,127)
+    setColourShelf(blackBoard,255,0,127)
+    pixels.show()
+    time.sleep(0.3)
+    setColourShelf(bar,255,0,255)
+    time.sleep(0.3)
+    #endingTronbone
+    wipeLEDAll()
+    setColourShelf(shelf4,255,0,0)
+    time.sleep(0.2)
+    wipeLEDAll()
+    setColourShelf(shelf7,255,0,0)
+    time.sleep(0.2)
+    wipeLEDAll()
+    setColourShelfWithoutShow(shelf2,255,0,0)
+    setColourShelfWithoutShow(shelf1,255,0,0)
+    pixels.show()
+    time.sleep(0.2)
+    wipeLEDAll()
+    setColourShelf(shelf8,255,0,0)
+    time.sleep(0)
+    wipeLEDAll()
+    setColourShelf(shelf3,255,0,0)
+    time.sleep(0)
+    wipeLEDAll()
+    setColourShelfWithoutShow(shelf5,255,0,0)
+    setColourShelfWithoutShow(shelf6,255,0,0)
+    pixels.show()
+    time.sleep(0.2)
+    wipeLEDAll()
+    setColourShelf(blackBoard,255,0,0)
+    time.sleep(0.2)
+    wipeLEDAll()
+    setColourShelf(leftShelfs,255,0,0)
+    time.sleep(0.2)
+    setColourShelf(rightShels,255,0,0)
+    time.sleep(0.2)
+    lightUpAll([255,255,89],3,0.1,bar)
+    lightDownAll([255,255,89],3,0.1,bar)
+    time.sleep(5)
+    #thread101.terminate()
+    return ("Success"), 200
 
 ##Run
 if __name__ == '__main__':
     #start_runner()
-    startupLights()
+    #startupLights()
     app.run(debug=True, host='0.0.0.0')
     

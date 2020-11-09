@@ -6,16 +6,8 @@ from flask.json import jsonify
 from flask.views import MethodView
 
 class PresetsAPI(MethodView):
-  def get(self, preset_id):
-    presets_data = self.load_presets()
-
-    if preset_id is None:
-      return json.dumps(presets_data), 200, { 'Content-Type': 'application/json' }
-    else:
-      for preset in presets_data:
-        if preset["id"] == preset_id:
-          return json.dumps(preset), 200, { 'Content-Type': 'application/json' }
-      return 'Preset Not Found', 404, { 'Content-Type': 'application/json' }
+  def get(self):
+    return json.dumps(self.load_presets()), 200, { 'Content-Type': 'application/json' }
 
   def post(self):
     return ('Post Preset'), 200

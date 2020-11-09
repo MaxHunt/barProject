@@ -4,9 +4,8 @@ from presets import PresetsAPI
 
 app = Flask(__name__)
 presets_view = PresetsAPI.as_view('presets')
-app.add_url_rule('/presets/', defaults = { 'preset_id': None }, view_func = presets_view, methods = ['GET'])
-app.add_url_rule('/presets/', view_func= presets_view, methods = ['POST'])
-app.add_url_rule('/presets/<string:preset_id>', view_func = presets_view, methods=['GET', 'PUT', 'DELETE'])
+app.add_url_rule('/presets/', view_func= presets_view, methods = ['GET', 'POST'])
+app.add_url_rule('/presets/<string:preset_id>', view_func = presets_view, methods=['PUT', 'DELETE'])
 
 #Flask and Ajax returns
 @app.route('/')

@@ -1,5 +1,6 @@
 [
   {
+    "id": "default",
     "name": "Default",
     "shelf1": {
       "r": 255,
@@ -63,6 +64,7 @@
     }
   },
   {
+    "id": "test",
     "name": "Test",
     "shelf1": {
       "r": 255,
@@ -126,6 +128,7 @@
     }
   },
   {
+    "id": "purple_and_yellow",
     "name": "Purple and Yellow",
     "shelf1": {
       "r": 227,
@@ -189,6 +192,7 @@
     }
   },
   {
+    "id": "rainbow",
     "name": "Rainbow",
     "shelf1": {
       "r": 242,
@@ -252,6 +256,7 @@
     }
   },
   {
+    "id": "hayleys_colours",
     "name": "Hayleys Colours",
     "shelf1": {
       "r": 0,
@@ -315,6 +320,7 @@
     }
   },
   {
+    "id": "fire",
     "name": "Fire",
     "shelf1": {
       "r": 255,
@@ -378,6 +384,7 @@
     }
   },
   {
+    "id": "st_georges_flag",
     "name": "St Georges Flag",
     "shelf1": {
       "r": 255,

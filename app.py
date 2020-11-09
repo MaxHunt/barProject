@@ -65,7 +65,10 @@ pixels = neopixel.NeoPixel(
 )
 #define app
 app = Flask(__name__)
-app.add_url_rule('/presets/', view_func=PresetsAPI.as_view('presets'))
+presets_view = PresetsAPI.as_view('presets')
+app.add_url_rule('/presets/', defaults = { 'preset_id': None }, view_func = presets_view, methods = ['GET'])
+app.add_url_rule('/presets/', view_func= presets_view, methods = ['POST'])
+app.add_url_rule('/presets/<string:preset_id>', view_func = presets_view, methods=['GET', 'PUT', 'DELETE'])
 
 #Colour methods
 def soildColourAll(r,g,b):

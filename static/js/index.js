@@ -240,6 +240,7 @@ $("#fab").click(function (e) {
     //data: JSON.stringify(data),
     success: function (response) {
       console.log(`${response} - Secrect Revealed!`);
+      //fab.pause()
     },
     error: function () {
       console.log($`Error upon revealing secrect`);

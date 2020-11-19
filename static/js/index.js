@@ -2,6 +2,24 @@ $(document).ready(function () {
   buildPresetDropdown();
 });
 
+//Shelves
+var colorPicker1 = new iro.ColorPicker('#picker1');
+var colorPicker2 = new iro.ColorPicker('#picker2');
+var colorPicker3 = new iro.ColorPicker('#picker3');
+var colorPicker4 = new iro.ColorPicker('#picker4');
+var colorPicker5 = new iro.ColorPicker('#picker5');
+var colorPicker6 = new iro.ColorPicker('#picker6');
+var colorPicker7 = new iro.ColorPicker('#picker7');
+var colorPicker8 = new iro.ColorPicker('#picker8');
+
+// //Floor
+var colorPicker10 = new iro.ColorPicker('#picker10');
+var colorPicker11 = new iro.ColorPicker('#picker11');
+var colorPicker12 = new iro.ColorPicker('#picker12');
+
+//Blackboard
+var colorPicker13 = new iro.ColorPicker('#picker13');
+
 let presets = [];
 
 function buildPresetDropdown() {
@@ -29,7 +47,42 @@ $('#preset-dropdown').on('change', function () {
 });
 
 $('#add-preset-button').on('click', function () {
-  console.log('Add Preset Button');
+  const name = $('#add-preset-name').val();
+  if (name === '') {
+    console.error('Please provide a name for the new preset');
+  } else {
+    const id = name.toLowerCase().replace(' ', '_');
+    const data = {
+      id,
+      name,
+      shelf1: hexToRgb(colorPicker1.color),
+      shelf2: hexToRgb(colorPicker2.color),
+      shelf3: hexToRgb(colorPicker3.color),
+      shelf4: hexToRgb(colorPicker4.color),
+      shelf5: hexToRgb(colorPicker5.color),
+      shelf6: hexToRgb(colorPicker6.color),
+      shelf7: hexToRgb(colorPicker7.color),
+      shelf8: hexToRgb(colorPicker8.color),
+      floorLeft: hexToRgb(colorPicker10.color),
+      floorMiddle: hexToRgb(colorPicker11.color),
+      floorRight: hexToRgb(colorPicker12.color),
+      blackboard: hexToRgb(colorPicker13.color),
+    };
+    $.ajax({
+      type: 'POST',
+      url: '/presets/',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data,
+      success: function (data) {
+        console.log('Success');
+      },
+      error: function () {
+        console.error('Failed to save preset \'', data.name, '\'');
+      }
+    });
+  }
 });
 
 function setStripColor(shelf, hexColor) {
@@ -93,24 +146,6 @@ function setShelfLights(shelf, r, g, b) {
   });
 }
 
-//Shelves
-var colorPicker1 = new iro.ColorPicker('#picker1');
-var colorPicker2 = new iro.ColorPicker('#picker2');
-var colorPicker3 = new iro.ColorPicker('#picker3');
-var colorPicker4 = new iro.ColorPicker('#picker4');
-var colorPicker5 = new iro.ColorPicker('#picker5');
-var colorPicker6 = new iro.ColorPicker('#picker6');
-var colorPicker7 = new iro.ColorPicker('#picker7');
-var colorPicker8 = new iro.ColorPicker('#picker8');
-
-// //Floor
-var colorPicker10 = new iro.ColorPicker('#picker10');
-var colorPicker11 = new iro.ColorPicker('#picker11');
-var colorPicker12 = new iro.ColorPicker('#picker12');
-
-//Blackboard
-var colorPicker13 = new iro.ColorPicker('#picker13');
-
 let selectedColor = '#000000';
 
 colorPicker1.on('color:change', function (color) {
@@ -149,7 +184,6 @@ colorPicker12.on('color:change', function (color) {
 colorPicker13.on('color:change', function (color) {
   selectedColor = color.hexString;
 });
-
 
 $('.picker').on('pointerup', function (e) {
   const shelf = e.currentTarget.attributes.getNamedItem('name').value;

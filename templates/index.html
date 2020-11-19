@@ -47,7 +47,11 @@
             <div class="strip"></div>
             <h1>Presets</h1>
             <select name="presets" id="preset-dropdown"></select>
-            <input id="add-preset-button" value="Add Preset" class="pure-button" />
+            <form id="add-preset-form" class="pure-form pure-form-stacked">
+                <label id="add-preset-name-label" for="add-preset-name">Name</label>
+                <input id="add-preset-name" type="text"></input>
+                <input id="add-preset-button" value="Add Preset" class="pure-button" />
+            </form>
         </div>
         <div class="shelf" number="1">
             <div class="strip"></div>

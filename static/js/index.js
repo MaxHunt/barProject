@@ -9,7 +9,7 @@ function buildPresetDropdown() {
     type: 'GET',
     url: '/presets/',
     success: function (data) {
-      presets = JSON.parse(data);
+      presets = data;
       presets.forEach((preset) => {
         $('#preset-dropdown').append(`<option value="${preset.name.toLowerCase()}">${preset.name}</option>`);
       });
@@ -26,6 +26,10 @@ $('#preset-dropdown').on('change', function () {
       setPreset(presets[i]);
     }
   }
+});
+
+$('#add-preset-button').on('click', function () {
+  console.log('Add Preset Button');
 });
 
 function setStripColor(shelf, hexColor) {
